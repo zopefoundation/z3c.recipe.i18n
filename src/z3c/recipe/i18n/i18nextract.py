@@ -84,7 +84,7 @@ def main(argv=sys.argv):
     python_only = False
     site_zcml = None
     makers = []
-    paths = []
+    eggPaths = []
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             usage(0)
@@ -107,12 +107,7 @@ def main(argv=sys.argv):
             path = os.path.dirname(package.__file__)
             if not os.path.exists(path):
                 usage(1, 'The specified path does not exist.')
-            paths.append(path)
-
-    # When generating the comments, we will not need the base directory info,
-    # since it is specific to everyone's installation
-    src_start = path.rfind('src')
-    base_dir = path[:src_start]
+            eggPaths.append((arg, path))
 
     # setup output file
     output_file = domain+'.pot'
@@ -137,25 +132,44 @@ def main(argv=sys.argv):
     # setup pot maker
     maker = POTMaker(output_file, '')
 
+#package: 'src\\p01\\feed'
+#base:    'd:\\svnp01\\packages\\p01.locales\\trunk\\externals\\p01.feed\\'
+#path:    'd:\\svnp01\\packages\\p01.locales\\trunk\\externals\\p01.feed\\src\\p01\\feed'
+
+#package: 'd:\\home\\.buildout\\eggs\\z3c.contents-0.5.0-py2.4.egg\\z3c\\contents'
+#base:    'd:\\home\\.buildout\\eggs\\z3c.contents-0.5.0-py2.4.egg\\z3c\\contents'
+#path:    'd:\\home\\.buildout\\eggs\\z3c.contents-0.5.0-py2.4.egg\\z3c\\contents'
+
     # add maker for each given path
-    for path in paths:
-        src_start = path.rfind('src')
-        base_dir = path[:src_start]
-        packagePath = path[len(base_dir):]
+    for pkgName, path in eggPaths:
+        srcIdx = path.rfind('src')
+        if srcIdx == -1:
+            # this is a egg package, strip down base path
+            basePath = path
+            moduleNames = pkgName.split('.')
+            moduleNames.reverse()
+            for mName in moduleNames:
+                mIdx = path.rfind(mName)
+                basePath = basePath[:mIdx]
+            pkgPath = path[len(basePath):]
+        else:
+            # this is a package linked in as externals
+            basePath = path[:srcIdx]
+            pkgPath = path[len(basePath):]
 
         print "package: %r\n" \
               "base:    %r\n" \
               "path:    %r\n" \
-              % (packagePath, base_dir, path)
+              % (pkgPath, basePath, path)
 
-        maker.add(py_strings(path, domain, exclude=exclude_dirs), base_dir)
+        maker.add(py_strings(path, domain, exclude=exclude_dirs), basePath)
         if not python_only:
-            maker.add(zcml_strings(path, domain, site_zcml), base_dir)
+            maker.add(zcml_strings(path, domain, site_zcml), basePath)
             maker.add(tal_strings(path, domain, include_default_domain,
-                                  exclude=exclude_dirs), base_dir)
+                                  exclude=exclude_dirs), basePath)
         for m in makers:
             poMaker = resolve(m)
-            maker.add(poMaker(path, base_dir, exclude_dirs))
+            maker.add(poMaker(path, basePath, exclude_dirs))
     maker.write()
     print "output: %r\n" % output_file
 
