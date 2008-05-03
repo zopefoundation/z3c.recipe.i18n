@@ -5,4 +5,8 @@ CHANGES
 Version 0.5.0 (unreleased)
 --------------------------
 
+- Implemented environment section argument support for i18nextract.py script. 
+  This is a name of a section which defines a set of environment variables that 
+  should be exported before starting the extraction.
+
 - Initial Release

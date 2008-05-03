@@ -64,6 +64,12 @@ exludeDirectoryName (optional, default=[])
   Allows to specify one or more directory name, relative to the package, to 
   exclude. (None if not used)
 
+environment
+    A section name defining a set of environment variables that should be 
+    exported before starting the tests. Can be used for set product 
+    configuration enviroment.
+
+
 Test
 ****
 
@@ -106,9 +112,9 @@ Now, Let's run the buildout and see what we get:
   >>> print system(join('bin', 'buildout')),
   Installing i18n.
   i18n: setting up i18n tools
-  Generated script 'bin\\i18nextract'.
-  Generated script 'bin\\i18nmergeall'.
-  Generated script 'bin\\i18nstats'.
+  Generated script '/sample-buildout/bin/i18nextract'.
+  Generated script '/sample-buildout/bin/i18nmergeall'.
+  Generated script '/sample-buildout/bin/i18nstats'.
 
 After running buildout, the bin folder contains the different i18n script:
 
@@ -132,8 +138,13 @@ The i18nextract.py contains the following code:
   <BLANKLINE>
   import sys
   sys.path[0:0] = [
-    ...
+  ...
     ]
+  <BLANKLINE>
+  import os
+  sys.argv[0] = os.path.abspath(sys.argv[0])
+  os.chdir('...src')
+  <BLANKLINE>
   <BLANKLINE>
   import z3c.recipe.i18n.i18nextract
   <BLANKLINE>
@@ -188,6 +199,9 @@ Lets create a `buildout.cfg` file using all available arguments:
   ... parts = i18n
   ... offline = true
   ...
+  ... [testenv]
+  ... fooDir = ${buildout:directory}/parts/foo
+  ...
   ... [i18n]
   ... recipe = z3c.recipe.i18n:i18n
   ... eggs = z3c.recipe.i18n
@@ -200,6 +214,7 @@ Lets create a `buildout.cfg` file using all available arguments:
   ... pythonOnly = true
   ... exludeDirectoryName = foo
   ...                       bar
+  ... environment = testenv
   ... ''' % globals())
 
 Now, Let's run the buildout and see what we get:
@@ -208,9 +223,9 @@ Now, Let's run the buildout and see what we get:
   Uninstalling i18n.
   Installing i18n.
   i18n: setting up i18n tools
-  Generated script 'bin\\i18nextract'.
-  Generated script 'bin\\i18nmergeall'.
-  Generated script 'bin\\i18nstats'.
+  Generated script '/sample-buildout/bin/i18nextract'.
+  Generated script '/sample-buildout/bin/i18nmergeall'.
+  Generated script '/sample-buildout/bin/i18nstats'.
 
 After running buildout, the bin folder contains the different i18n script:
 
@@ -231,12 +246,17 @@ i18nextract
 The i18nextract.py contains the following code:
 
   >>> cat('bin', 'i18nextract-script.py')
-  #!C:\Python24\python.exe
   <BLANKLINE>
   import sys
   sys.path[0:0] = [
   ...
     ]
+  <BLANKLINE>
+  import os
+  sys.argv[0] = os.path.abspath(sys.argv[0])
+  os.chdir('...src')
+  os.environ['fooDir'] = '/sample-buildout/parts/foo'
+  <BLANKLINE>
   <BLANKLINE>
   import z3c.recipe.i18n.i18nextract
   <BLANKLINE>

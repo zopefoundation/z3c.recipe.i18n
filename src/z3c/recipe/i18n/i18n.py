@@ -37,6 +37,15 @@ zcmlTemplate = """<configure xmlns='http://namespaces.zope.org/zope'
 </configure>
 """
 
+initialization_template = """import os
+sys.argv[0] = os.path.abspath(sys.argv[0])
+os.chdir(%r)
+"""
+
+
+env_template = """os.environ['%s'] = %r
+"""
+
 
 class I18nSetup(object):
 
@@ -115,11 +124,21 @@ class I18nSetup(object):
         for x in exludeDirNames:
             arguments.extend(['-x', x])
 
+        initialization = initialization_template % this_loc
+        env_section = self.options.get('environment', '').strip()
+        if env_section:
+            env = self.buildout[env_section]
+            for key, value in env.items():
+                initialization += env_template % (key, value)
+
+        # Generate i18nextract
         generated = zc.buildout.easy_install.scripts(
             [('%sextract'% self.name, 'z3c.recipe.i18n.i18nextract', 'main')],
-            ws, self.options['executable'], 'bin',
+            ws, self.options['executable'],
+            self.buildout['buildout']['bin-directory'],
             extra_paths = [this_loc],
             arguments = arguments,
+            initialization = initialization,
             )
 
         # Generate i18nmergeall
@@ -129,20 +148,21 @@ class I18nSetup(object):
                 [('%smergeall'% self.name,
                   'z3c.recipe.i18n.i18nmergeall',
                   'main')],
-                ws, self.options['executable'], 'bin',
+                ws, self.options['executable'],
+                self.buildout['buildout']['bin-directory'],
                 extra_paths = [this_loc],
                 arguments = arguments,
             ))
 
         # Generate i18nstats
-
         arguments = ['%sstats'% self.name, '-l', output]
         generated.extend(
             zc.buildout.easy_install.scripts(
                 [('%sstats'% self.name,
                   'z3c.recipe.i18n.i18nstats',
                   'main')],
-                ws, self.options['executable'], 'bin',
+                ws, self.options['executable'],
+                self.buildout['buildout']['bin-directory'],
                 extra_paths = [this_loc],
                 arguments = arguments,
             ))
