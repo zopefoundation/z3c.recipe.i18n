@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-Version 0.5.0 (unreleased)
+Version 0.5.0 (2009-09-09)
 --------------------------
 
 - Implemented environment section argument support for i18nextract.py script. 

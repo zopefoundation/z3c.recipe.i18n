@@ -26,10 +26,10 @@ def read(*rnames):
 
 setup(
     name = 'z3c.recipe.i18n',
-    version = '0.5.0dev',
+    version = '0.5.0',
     author = 'Roger Ineichen and the Zope Community',
     author_email = 'zope-dev@zope.org',
-    description = 'Zope3 development server setup recipes',
+    description = 'Zope3 egg based i18n locales extration recipes',
     long_description=(
         read('README.txt')
         + '\n\n' +
@@ -43,7 +43,7 @@ setup(
     license = 'ZPL 2.1',
     keywords = 'zope3 z3c i18n locales extraction recipe',
     classifiers = [
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Zope Public License',
