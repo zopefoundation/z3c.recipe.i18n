@@ -132,19 +132,11 @@ def main(argv=sys.argv):
     # setup pot maker
     maker = POTMaker(output_file, '')
 
-#package: 'src\\p01\\feed'
-#base:    'd:\\svnp01\\packages\\p01.locales\\trunk\\externals\\p01.feed\\'
-#path:    'd:\\svnp01\\packages\\p01.locales\\trunk\\externals\\p01.feed\\src\\p01\\feed'
-
-#package: 'd:\\home\\.buildout\\eggs\\z3c.contents-0.5.0-py2.4.egg\\z3c\\contents'
-#base:    'd:\\home\\.buildout\\eggs\\z3c.contents-0.5.0-py2.4.egg\\z3c\\contents'
-#path:    'd:\\home\\.buildout\\eggs\\z3c.contents-0.5.0-py2.4.egg\\z3c\\contents'
-
     # add maker for each given path
     for pkgName, path in eggPaths:
         srcIdx = path.rfind('src')
         if srcIdx == -1:
-            # this is a egg package, strip down base path
+            # this is an egg package, strip down base path
             basePath = path
             moduleNames = pkgName.split('.')
             moduleNames.reverse()

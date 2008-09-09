@@ -44,10 +44,6 @@ def merge(path):
     for language in os.listdir(path):
         lc_messages_path = os.path.join(path, language, 'LC_MESSAGES')
 
-        # English is the default for Zope, so ignore it
-        #if language == 'en':
-        #    continue
-
         # Make sure we got a language directory
         if not os.path.isdir(lc_messages_path):
             continue
