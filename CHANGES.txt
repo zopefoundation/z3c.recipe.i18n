@@ -5,6 +5,8 @@ CHANGES
 Version 0.5.1dev (unreleased)
 -----------------------------
 
+- Updated docs to render nicely when fed to docutils. [ulif]
+
 - Added `zip_safe` flag in `setup.py` to avoid meaningless warnings
   when used with buildout. [ulif]
 
