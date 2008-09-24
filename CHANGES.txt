@@ -5,7 +5,8 @@ CHANGES
 Version 0.5.1dev (unreleased)
 -----------------------------
 
-- ...
+- Added `zip_safe` flag in `setup.py` to avoid meaningless warnings
+  when used with buildout. [ulif]
 
 
 Version 0.5.0 (2009-09-09)

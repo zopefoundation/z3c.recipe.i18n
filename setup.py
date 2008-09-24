@@ -53,6 +53,7 @@ setup(
         'Topic :: Internet :: WWW/HTTP',
         'Framework :: Zope3'],
     url = 'http://pypi.python.org/pypi/z3c.recipe.i18n',
+    zip_safe = False,
     packages = find_packages('src'),
     include_package_data = True,
     package_dir = {'':'src'},
