@@ -10,7 +10,7 @@ translation messages from egg based packages.
 
 The 'i18n' recipe can be used to generate the required scripts for extract
 message ids from egg based packages. The i18nmerge allows to merge them into
-a *.po file. And the i18nstats script gives you an overview about the state
+a .po file. And the i18nstats script gives you an overview about the state
 of the translated files.
 
 Note
@@ -73,7 +73,7 @@ environment
 Test
 ****
 
-Lets define some (bogus) eggs that we can use in our application:
+Lets define some (bogus) eggs that we can use in our application::
 
   >>> mkdir('outputDir')
   >>> mkdir('demo1')
@@ -90,7 +90,7 @@ Lets define some (bogus) eggs that we can use in our application:
   ... setup(name = 'demo2', install_requires='demo1')
   ... ''')
 
-Lets create a minimal `buildout.cfg` file:
+Lets create a minimal `buildout.cfg` file::
 
   >>> write('buildout.cfg',
   ... '''
@@ -107,7 +107,7 @@ Lets create a minimal `buildout.cfg` file:
   ... zcml = <include package="z3c.recipe.tests" file="extract.zcml" />"
   ... ''' % globals())
 
-Now, Let's run the buildout and see what we get:
+Now, Let's run the buildout and see what we get::
 
   >>> print system(join('bin', 'buildout')),
   Installing i18n.
@@ -116,7 +116,7 @@ Now, Let's run the buildout and see what we get:
   Generated script '/sample-buildout/bin/i18nmergeall'.
   Generated script '/sample-buildout/bin/i18nstats'.
 
-After running buildout, the bin folder contains the different i18n script:
+After running buildout, the bin folder contains the different i18n script::
 
   >>> ls('bin')
   -  buildout-script.py
@@ -132,14 +132,14 @@ After running buildout, the bin folder contains the different i18n script:
 i18nextract
 -----------
 
-The i18nextract.py contains the following code:
+The i18nextract.py contains the following code::
 
   >>> cat('bin', 'i18nextract-script.py')
   <BLANKLINE>
   import sys
   sys.path[0:0] = [
   ...
-    ]
+   ]
   <BLANKLINE>
   import os
   sys.argv[0] = os.path.abspath(sys.argv[0])
@@ -154,7 +154,7 @@ The i18nextract.py contains the following code:
 i18nmergeall
 ------------
 
-The i18nmergeall.py contains the following code:
+The i18nmergeall.py contains the following code::
 
   >>> cat('bin', 'i18nmergeall-script.py')
   #!C:\Python24\python.exe
@@ -172,7 +172,7 @@ The i18nmergeall.py contains the following code:
 i18nstats
 ---------
 
-The i18nstats.py contains the following code:
+The i18nstats.py contains the following code::
 
   >>> cat('bin', 'i18nstats-script.py')
   #!C:\Python24\python.exe
@@ -191,7 +191,7 @@ The i18nstats.py contains the following code:
 Full Sample
 -----------
 
-Lets create a `buildout.cfg` file using all available arguments:
+Lets create a `buildout.cfg` file using all available arguments::
 
   >>> write('buildout.cfg',
   ... '''
@@ -217,7 +217,7 @@ Lets create a `buildout.cfg` file using all available arguments:
   ... environment = testenv
   ... ''' % globals())
 
-Now, Let's run the buildout and see what we get:
+Now, Let's run the buildout and see what we get::
 
   >>> print system(join('bin', 'buildout')),
   Uninstalling i18n.
@@ -227,7 +227,7 @@ Now, Let's run the buildout and see what we get:
   Generated script '/sample-buildout/bin/i18nmergeall'.
   Generated script '/sample-buildout/bin/i18nstats'.
 
-After running buildout, the bin folder contains the different i18n script:
+After running buildout, the bin folder contains the different i18n script::
 
   >>> ls('bin')
   -  buildout-script.py
@@ -243,7 +243,7 @@ After running buildout, the bin folder contains the different i18n script:
 i18nextract
 -----------
 
-The i18nextract.py contains the following code:
+The i18nextract.py contains the following code::
 
   >>> cat('bin', 'i18nextract-script.py')
   <BLANKLINE>
@@ -266,7 +266,7 @@ The i18nextract.py contains the following code:
 i18nmergeall
 ------------
 
-The i18nmergeall.py contains the following code:
+The i18nmergeall.py contains the following code::
 
   >>> cat('bin', 'i18nmergeall-script.py')
   #!C:\Python24\python.exe
@@ -284,7 +284,7 @@ The i18nmergeall.py contains the following code:
 i18nstats
 ---------
 
-The i18nstats.py contains the following code:
+The i18nstats.py contains the following code::
 
   >>> cat('bin', 'i18nstats-script.py')
   #!C:\Python24\python.exe
