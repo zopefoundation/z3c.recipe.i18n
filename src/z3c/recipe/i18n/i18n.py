@@ -168,3 +168,5 @@ class I18nSetup(object):
             ))
 
         return generated
+
+    update = install

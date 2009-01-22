@@ -139,7 +139,7 @@ The i18nextract.py contains the following code::
   import sys
   sys.path[0:0] = [
   ...
-   ]
+    ]
   <BLANKLINE>
   import os
   sys.argv[0] = os.path.abspath(sys.argv[0])

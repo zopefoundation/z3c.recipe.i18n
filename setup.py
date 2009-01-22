@@ -63,6 +63,7 @@ setup(
         test = [
             'zope.testing',
             'zope.app.locales',
+            'zc.lockfile',
             ],
         ),
     install_requires = [
@@ -72,6 +73,7 @@ setup(
         'zc.recipe.egg',
         'zope.testing',
         'zope.configuration',
+        'zc.lockfile',
         ],
     entry_points = {
         'zc.buildout': [
