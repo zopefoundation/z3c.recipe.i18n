@@ -5,10 +5,10 @@ CHANGES
 Version 0.5.2 (2009-03-10)
 --------------------------
 
-- Feature: Generate *.po file based on *.pot file if non exists in i18nmerge
-  script
+- Feature: Generate ``*.po`` file based on ``*.pot`` file if non exists in
+  i18nmerge script
 
-- Feature: Implemented i18ncompile script which uses msgfmt -o moPath poPath
+- Feature: Implemented i18ncompile script which uses ``msgfmt -o moPath poPath``
 
 
 Version 0.5.1 (2009-02-22)
