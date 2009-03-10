@@ -2,17 +2,23 @@
 CHANGES
 =======
 
-Version 0.5.2 (2009-03-10)
---------------------------
+0.5.3 (unreleased)
+------------------
 
-- Feature: Generate *.po file based on *.pot file if non exists in i18nmerge
-  script
-
-- Feature: Implemented i18ncompile script which uses msgfmt -o moPath poPath
+- ...
 
 
-Version 0.5.1 (2009-02-22)
---------------------------
+0.5.2 (2009-03-10)
+------------------
+
+- Feature: Generate ``*.po`` file based on ``*.pot`` file if non exists in
+  i18nmerge script
+
+- Feature: Implemented i18ncompile script which uses ``msgfmt -o moPath poPath``
+
+
+0.5.1 (2009-02-22)
+------------------
 
 - fix tests
 
@@ -22,8 +28,8 @@ Version 0.5.1 (2009-02-22)
   when used with buildout. [ulif]
 
 
-Version 0.5.0 (2009-09-09)
---------------------------
+0.5.0 (2009-09-09)
+------------------
 
 - Implemented environment section argument support for i18nextract.py script. 
   This is a name of a section which defines a set of environment variables that 
