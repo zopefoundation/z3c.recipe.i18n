@@ -115,12 +115,15 @@ Now, Let's run the buildout and see what we get::
   Generated script '/sample-buildout/bin/i18nextract'.
   Generated script '/sample-buildout/bin/i18nmergeall'.
   Generated script '/sample-buildout/bin/i18nstats'.
+  Generated script '/sample-buildout/bin/i18ncompile'.
 
 After running buildout, the bin folder contains the different i18n script::
 
   >>> ls('bin')
   -  buildout-script.py
   -  buildout.exe
+  -  i18ncompile-script.py
+  -  i18ncompile.exe
   -  i18nextract-script.py
   -  i18nextract.exe
   -  i18nmergeall-script.py
@@ -188,6 +191,25 @@ The i18nstats.py contains the following code::
       z3c.recipe.i18n.i18nstats.main(['i18nstats', '-l', '...outputDir'])
 
 
+i18ncompile
+-----------
+
+The i18ncompile.py contains the following code::
+
+  >>> cat('bin', 'i18ncompile-script.py')
+  #!C:\Python24\python.exe
+  <BLANKLINE>
+  import sys
+  sys.path[0:0] = [
+    ...
+    ]
+  <BLANKLINE>
+  import z3c.recipe.i18n.i18ncompile
+  <BLANKLINE>
+  if __name__ == '__main__':
+      z3c.recipe.i18n.i18ncompile.main(['i18ncompile', '-l', '...outputDir'])
+
+
 Full Sample
 -----------
 
@@ -226,12 +248,15 @@ Now, Let's run the buildout and see what we get::
   Generated script '/sample-buildout/bin/i18nextract'.
   Generated script '/sample-buildout/bin/i18nmergeall'.
   Generated script '/sample-buildout/bin/i18nstats'.
+  Generated script '/sample-buildout/bin/i18ncompile'.
 
 After running buildout, the bin folder contains the different i18n script::
 
   >>> ls('bin')
   -  buildout-script.py
   -  buildout.exe
+  -  i18ncompile-script.py
+  -  i18ncompile.exe
   -  i18nextract-script.py
   -  i18nextract.exe
   -  i18nmergeall-script.py

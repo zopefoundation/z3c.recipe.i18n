@@ -17,7 +17,7 @@
 This utility requires the GNU gettext package to be installed. The command
 'msgmerge' will be executed for each language.
 
-Usage: i18mergeall.py [options]
+Usage: i18nmergeall.py [options]
 Options:
 
     -h / --help
@@ -41,6 +41,12 @@ def usage(code, msg=''):
 
 
 def merge(path):
+    for pot_name in os.listdir(path):
+        if pot_name.endswith('.pot'):
+            break
+    domain = pot_name.split('.')[0]
+    potPath = os.path.join(path, domain+'.pot')
+    
     for language in os.listdir(path):
         lc_messages_path = os.path.join(path, language, 'LC_MESSAGES')
 
@@ -48,14 +54,15 @@ def merge(path):
         if not os.path.isdir(lc_messages_path):
             continue
 
+        poPath = os.path.join(lc_messages_path, domain+'.po')
+        if not os.path.exists(poPath):
+            poFile = open(poPath, 'wb')
+            poFile.write(open(potPath, 'rb').read())
+            poFile.close()
+
         msgs = []
-        for domain_file in os.listdir(lc_messages_path):
-            if domain_file.endswith('.po'):
-                domain_path = os.path.join(lc_messages_path, domain_file)
-                pot_path = os.path.join(path, domain_file+'t')
-                domain = domain_file.split('.')[0]
-                print 'Merging language "%s", domain "%s"' %(language, domain)
-                os.system('msgmerge -U %s %s' %(domain_path, pot_path))
+        print 'Merging language "%s", domain "%s"' %(language, domain)
+        os.system('msgmerge -U %s %s' %(poPath, potPath))
 
 
 def main(argv=sys.argv):

@@ -167,6 +167,19 @@ class I18nSetup(object):
                 arguments = arguments,
             ))
 
+        # Generate i18ncompile
+        arguments = ['%scompile'% self.name, '-l', output]
+        generated.extend(
+            zc.buildout.easy_install.scripts(
+                [('%scompile'% self.name,
+                  'z3c.recipe.i18n.i18ncompile',
+                  'main')],
+                ws, self.options['executable'],
+                self.buildout['buildout']['bin-directory'],
+                extra_paths = [this_loc],
+                arguments = arguments,
+            ))
+
         return generated
 
     update = install
