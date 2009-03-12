@@ -2,7 +2,12 @@
 CHANGES
 =======
 
-0.5.3 (unreleased)
+0.5.4 (unreleases)
+------------------
+
+- ...
+
+0.5.3 (2009-03-12)
 ------------------
 
 - Fix bug where i18nmerge miscalculated domains containing ".", everything
