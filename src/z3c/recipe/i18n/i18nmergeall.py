@@ -44,7 +44,7 @@ def merge(path):
     for pot_name in os.listdir(path):
         if pot_name.endswith('.pot'):
             break
-    domain = pot_name.split('.')[0]
+    domain = pot_name[:-4]
     potPath = os.path.join(path, domain+'.pot')
     
     for language in os.listdir(path):

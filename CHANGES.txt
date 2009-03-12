@@ -5,7 +5,8 @@ CHANGES
 0.5.3 (unreleased)
 ------------------
 
-- ...
+- Fix bug where i18nmerge miscalculated domains containing ".", everything
+  after the "." was ignored.
 
 
 0.5.2 (2009-03-10)
