@@ -120,24 +120,18 @@ Generated script '/sample-buildout/bin/i18ncompile'.
 After running buildout, the bin folder contains the different i18n script:
 
 >>> ls('bin')
--  buildout-script.py
--  buildout.exe
--  i18ncompile-script.py
--  i18ncompile.exe
--  i18nextract-script.py
--  i18nextract.exe
--  i18nmergeall-script.py
--  i18nmergeall.exe
--  i18nstats-script.py
--  i18nstats.exe
-
+-  buildout
+-  i18ncompile
+-  i18nextract
+-  i18nmergeall
+-  i18nstats
 
 i18nextract
 -----------
 
 The i18nextract.py contains the following code:
 
->>> cat('bin', 'i18nextract-script.py')
+>>> cat('bin', 'i18nextract')
 <BLANKLINE>
 import sys
 sys.path[0:0] = [
@@ -159,7 +153,7 @@ i18nmergeall
 
 The i18nmergeall.py contains the following code:
 
->>> cat('bin', 'i18nmergeall-script.py')
+>>> cat('bin', 'i18nmergeall')
 #!C:\Python24\python.exe
 <BLANKLINE>
 import sys
@@ -177,7 +171,7 @@ i18nstats
 
 The i18nstats.py contains the following code:
 
->>> cat('bin', 'i18nstats-script.py')
+>>> cat('bin', 'i18nstats')
 #!C:\Python24\python.exe
 <BLANKLINE>
 import sys
@@ -196,7 +190,7 @@ i18ncompile
 
 The i18ncompile.py contains the following code:
 
->>> cat('bin', 'i18ncompile-script.py')
+>>> cat('bin', 'i18ncompile')
 #!C:\Python24\python.exe
 <BLANKLINE>
 import sys
@@ -253,24 +247,18 @@ Generated script '/sample-buildout/bin/i18ncompile'.
 After running buildout, the bin folder contains the different i18n script:
 
 >>> ls('bin')
--  buildout-script.py
--  buildout.exe
--  i18ncompile-script.py
--  i18ncompile.exe
--  i18nextract-script.py
--  i18nextract.exe
--  i18nmergeall-script.py
--  i18nmergeall.exe
--  i18nstats-script.py
--  i18nstats.exe
-
+-  buildout
+-  i18ncompile
+-  i18nextract
+-  i18nmergeall
+-  i18nstats
 
 i18nextract
 -----------
 
 The i18nextract.py contains the following code:
 
->>> cat('bin', 'i18nextract-script.py')
+>>> cat('bin', 'i18nextract')
 <BLANKLINE>
 import sys
 sys.path[0:0] = [
@@ -293,7 +281,7 @@ i18nmergeall
 
 The i18nmergeall.py contains the following code:
 
->>> cat('bin', 'i18nmergeall-script.py')
+>>> cat('bin', 'i18nmergeall')
 #!C:\Python24\python.exe
 <BLANKLINE>
 import sys
@@ -311,7 +299,7 @@ i18nstats
 
 The i18nstats.py contains the following code:
 
->>> cat('bin', 'i18nstats-script.py')
+>>> cat('bin', 'i18nstats')
 #!C:\Python24\python.exe
 <BLANKLINE>
 import sys
