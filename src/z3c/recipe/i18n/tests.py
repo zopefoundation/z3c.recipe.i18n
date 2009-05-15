@@ -30,7 +30,6 @@ def setUp(test):
     zc.buildout.testing.install('zc.recipe.egg', test)
     zc.buildout.testing.install('zope.app.locales', test)
     zc.buildout.testing.install('zope.configuration', test)
-    zc.buildout.testing.install('zope.deprecation', test)
     zc.buildout.testing.install('zope.event', test)
     zc.buildout.testing.install('zope.i18nmessageid', test)
     zc.buildout.testing.install('zope.interface', test)

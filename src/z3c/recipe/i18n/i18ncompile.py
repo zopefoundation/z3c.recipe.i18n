@@ -51,7 +51,7 @@ def msgfmt(path):
 
         for poFile in os.listdir(lc_messages_path):
             if poFile.endswith('.po'):
-                domain = poFile.split('.')[0]
+                domain = poFile.rsplit('.', 1)[0]
                 base = os.path.join(lc_messages_path, domain)
                 poPath = str(base + '.po')
                 moPath = str(base + '.mo')
