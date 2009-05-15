@@ -73,7 +73,8 @@ def main(argv=sys.argv):
         opts, args = getopt.getopt(
             argv[1:],
             'hed:s:i:m:p:o:x:',
-            ['help', 'domain=', 'site_zcml=', 'path=', 'python-only'])
+            ['help', 'domain=', 'site_zcml=', 'path=', 'python-only',
+             'exclude-default-domain'])
     except getopt.error, msg:
         usage(1, msg)
 
