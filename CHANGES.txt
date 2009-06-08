@@ -5,6 +5,9 @@ CHANGES
 0.5.4 (unreleases)
 ------------------
 
+- Fix bug where zcml_strings collect the same path more then once because it
+  follows the configuration zcml for each package.
+
 - Fix bug where i18ncompile miscalculated domains containing ".", everything
   after the "." was ignored.
 

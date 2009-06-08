@@ -68,6 +68,35 @@ def usage(code, msg=''):
     sys.exit(code)
 
 
+def zcml_strings(path, domain="zope", site_zcml=None):
+    """Retrieve all ZCML messages from `dir` that are in the `domain`.
+    
+    Note, the pot maker runs in a loop for each package and the maker collects
+    only the given messages from such a package by the given path. This allows
+    us to collect messages from eggs and external packages. This also prevents
+    to collect the same message more then one time since we use the same zcml
+    configuration for each package path.
+    """
+    from zope.app.appsetup import config
+    context = config(site_zcml, features=("devmode",), execute=False)
+    catalog = context.i18n_strings.get(domain, {})
+    res = {}
+    duplicated = []
+    append = duplicated.append
+    for msg, locations  in catalog.items():
+        for filename, lineno in locations:
+            # only collect locations based on the given path
+            if filename.startswith(path):
+                id = '%s-%s-%s' % (msg, filename, lineno)
+                # skip duplicated entries
+                if id not in duplicated:
+                    append(id)
+                    l = res.get(msg, [])
+                    l.append((filename, lineno))
+                    res[msg] = l
+    return res
+
+
 def main(argv=sys.argv):
     try:
         opts, args = getopt.getopt(
@@ -128,7 +157,6 @@ def main(argv=sys.argv):
     from zope.app.locales.extract import POTMaker
     from zope.app.locales.extract import py_strings
     from zope.app.locales.extract import tal_strings
-    from zope.app.locales.extract import zcml_strings
 
     # setup pot maker
     maker = POTMaker(output_file, '')
@@ -162,7 +190,8 @@ def main(argv=sys.argv):
                                   exclude=exclude_dirs), basePath)
         for m in makers:
             poMaker = resolve(m)
-            maker.add(poMaker(path, basePath, exclude_dirs))
+            maker.add(poMaker(path, basePath, exclude_dirs), basePath)
+
     maker.write()
     print "output: %r\n" % output_file
 
