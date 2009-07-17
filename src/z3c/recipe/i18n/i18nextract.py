@@ -163,20 +163,13 @@ def main(argv=sys.argv):
 
     # add maker for each given path
     for pkgName, path in eggPaths:
-        srcIdx = path.rfind('src')
-        if srcIdx == -1:
-            # this is an egg package, strip down base path
-            basePath = path
-            moduleNames = pkgName.split('.')
-            moduleNames.reverse()
-            for mName in moduleNames:
-                mIdx = path.rfind(mName)
-                basePath = basePath[:mIdx]
-            pkgPath = path[len(basePath):]
-        else:
-            # this is a package linked in as externals
-            basePath = path[:srcIdx]
-            pkgPath = path[len(basePath):]
+        basePath = path
+        moduleNames = pkgName.split('.')
+        moduleNames.reverse()
+        for mName in moduleNames:
+            mIdx = path.rfind(mName)
+            basePath = basePath[:mIdx]
+        pkgPath = path[len(basePath):]
 
         print "package: %r\n" \
               "base:    %r\n" \
