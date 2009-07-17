@@ -56,7 +56,7 @@ class I18nSetup(object):
         if 'eggs' not in self.options:
             self.options['eggs'] = ''
         self.options['eggs'] = self.options['eggs'] + '\n' \
-                             + 'zope.app.locales'
+                             + 'zope.app.locales [extract]'
         self.egg = zc.recipe.egg.Egg(buildout, name, options)
 
     def install(self):

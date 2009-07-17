@@ -31,6 +31,7 @@ def setUp(test):
     zc.buildout.testing.install('zc.recipe.egg', test)
     zc.buildout.testing.install('zdaemon', test)
     zc.buildout.testing.install('zope.annotation', test)
+    zc.buildout.testing.install('zope.app.applicationcontrol', test)
     zc.buildout.testing.install('zope.app.appsetup', test)
     zc.buildout.testing.install('zope.app.basicskin', test)
     zc.buildout.testing.install('zope.app.component', test)
