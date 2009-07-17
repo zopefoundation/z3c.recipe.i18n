@@ -47,6 +47,9 @@ maker
   must be located in the python path because it get resolved by
   zope.configuration.name.resolve. For a sample maker see 
   z3c.csvvocabulary.csvStrings.
+  Makers are called with these arguments: 'path', 'base_path', 'exclude_dirs',
+  'domain', 'include_default_domain' and 'site_zcml'. The return value has to
+  be a catalog dictionary.
 
 zcml (required)
   The contents of configuration used for extraction. Normaly used for load 

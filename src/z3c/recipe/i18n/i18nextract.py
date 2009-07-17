@@ -181,8 +181,20 @@ def main(argv=sys.argv):
             maker.add(zcml_strings(path, domain, site_zcml), basePath)
             maker.add(tal_strings(path, domain, include_default_domain,
                                   exclude=exclude_dirs), basePath)
-        for m in makers:
-            maker.add(m(path, basePath, exclude_dirs), basePath)
+        for maker_func in makers:
+            try:
+                maker.add(
+                    maker_func(
+                        path=path,
+                        base_path=basePath,
+                        exclude_dirs=exclude_dirs,
+                        domain=domain,
+                        include_default_domain=include_default_domain,
+                        site_zcml=site_zcml,
+                        ), basePath)
+            except TypeError:
+                # BBB: old arguments
+                maker.add(maker_func(path, basePath, exclude_dirs), basePath)
 
     maker.write()
     print "output: %r\n" % output_file
