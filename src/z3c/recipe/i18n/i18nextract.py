@@ -125,7 +125,7 @@ def main(argv=sys.argv):
         elif opt in ('-e', '--exclude-default-domain'):
             include_default_domain = False
         elif opt in ('-m', ):
-            makers.append(arg)
+            makers.append(resolve(arg))
         elif opt in ('-o', ):
             output_dir = arg
         elif opt in ('-x', ):
@@ -182,8 +182,7 @@ def main(argv=sys.argv):
             maker.add(tal_strings(path, domain, include_default_domain,
                                   exclude=exclude_dirs), basePath)
         for m in makers:
-            poMaker = resolve(m)
-            maker.add(poMaker(path, basePath, exclude_dirs), basePath)
+            maker.add(m(path, basePath, exclude_dirs), basePath)
 
     maker.write()
     print "output: %r\n" % output_file
