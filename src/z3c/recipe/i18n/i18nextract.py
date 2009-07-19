@@ -53,13 +53,61 @@ Options:
         May be used more than once.
     --python-only
         Only extract message ids from Python
+    -t <path>
+        Specifies the file path of the header template.
 
-$Id:$
+$Id$
 """
 
+import os, sys, getopt
+import time
+
+from zope.app.locales.extract import DEFAULT_CHARSET
+from zope.app.locales.extract import DEFAULT_ENCODING
+from zope.app.locales.extract import pot_header as _DEFAULT_POT_HEADER
+from zope.app.locales.extract import POTMaker
+from zope.app.locales.extract import py_strings
+from zope.app.locales.extract import tal_strings
 from zope.configuration.name import resolve
 
-import os, sys, getopt
+
+class POTMaker(POTMaker):
+    """This class inserts sets of strings into a POT file.
+    """
+
+    def __init__ (self, output_fn, path, header_template=None):
+        self._output_filename = output_fn
+        self.path = path
+        if header_template is not None and os.path.exists(header_template):
+            file = open(header_template, 'r')
+            try:
+                self._pot_header = file.read()
+            finally:
+                file.close()
+        else:
+            self._pot_header = _DEFAULT_POT_HEADER
+        self.catalog = {}
+
+    def write(self):
+        pot_header = self._pot_header
+
+        file = open(self._output_filename, 'w')
+        file.write(pot_header % {'time':     time.ctime(),
+                                 'version':  self._getProductVersion(),
+                                 'charset':  DEFAULT_CHARSET,
+                                 'encoding': DEFAULT_ENCODING})
+
+        # Sort the catalog entries by filename
+        catalog = self.catalog.values()
+        catalog.sort()
+
+        # Write each entry to the file
+        for entry in catalog:
+            entry.write(file)
+
+        file.close()
+
+
 def usage(code, msg=''):
     # Python 2.1 required
     print >> sys.stderr, __doc__
@@ -101,7 +149,7 @@ def main(argv=sys.argv):
     try:
         opts, args = getopt.getopt(
             argv[1:],
-            'hed:s:i:m:p:o:x:',
+            'hed:s:i:m:p:o:x:t:',
             ['help', 'domain=', 'site_zcml=', 'path=', 'python-only',
              'exclude-default-domain'])
     except getopt.error, msg:
@@ -115,6 +163,7 @@ def main(argv=sys.argv):
     site_zcml = None
     makers = []
     eggPaths = []
+    header_template = None
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             usage(0)
@@ -138,6 +187,10 @@ def main(argv=sys.argv):
             if not os.path.exists(path):
                 usage(1, 'The specified path does not exist.')
             eggPaths.append((arg, path))
+        elif opt in ('-t', ):
+            if not os.path.exists(arg):
+                usage(1, 'The specified header template does not exist.')
+            header_template = arg
 
     # setup output file
     output_file = domain+'.pot'
@@ -151,15 +204,12 @@ def main(argv=sys.argv):
           "exclude dirs:           %r\n" \
           "include default domain: %r\n" \
           "python only:            %r\n" \
+          "header template:        %r\n" \
           % (domain, site_zcml, exclude_dirs, include_default_domain,
-             python_only)
-
-    from zope.app.locales.extract import POTMaker
-    from zope.app.locales.extract import py_strings
-    from zope.app.locales.extract import tal_strings
+             python_only, header_template)
 
     # setup pot maker
-    maker = POTMaker(output_file, '')
+    maker = POTMaker(output_file, '', header_template)
 
     # add maker for each given path
     for pkgName, path in eggPaths:

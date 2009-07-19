@@ -5,6 +5,9 @@ CHANGES
 0.5.5 (unreleased)
 ------------------
 
+- Feature: Added new 'headerTemplate' option that allows to specify the path
+  of a customized pot header template.
+
 - Makers are now called with additional keyword arguments.
 
 - Fixed dependencies: The 'extract' extra of zope.app.locales is required.

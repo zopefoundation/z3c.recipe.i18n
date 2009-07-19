@@ -12,7 +12,7 @@
 #
 ##############################################################################
 """
-$Id:$
+$Id$
 """
 __docformat__ = 'restructuredtext'
 
@@ -123,6 +123,13 @@ class I18nSetup(object):
                           if x!='']
         for x in exludeDirNames:
             arguments.extend(['-x', x])
+
+        header_template = self.options.get('headerTemplate', None)
+        if header_template is not None:
+            header_template = os.path.normpath(
+                os.path.join(self.buildout['buildout']['directory'],
+                             header_template.strip()))
+            arguments.extend(['-t', header_template])
 
         initialization = initialization_template % this_loc
         env_section = self.options.get('environment', '').strip()

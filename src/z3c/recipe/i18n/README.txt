@@ -67,6 +67,9 @@ exludeDirectoryName (optional, default=[])
   Allows to specify one or more directory name, relative to the package, to 
   exclude. (None if not used)
 
+headerTemplate (optional, default=None)
+  The path of the pot header template relative to the buildout directory.
+
 environment
   A section name defining a set of environment variables that should be 
   exported before starting the tests. Can be used for set product 
@@ -238,6 +241,7 @@ Lets create a `buildout.cfg` file using all available arguments:
   ... pythonOnly = true
   ... exludeDirectoryName = foo
   ...                       bar
+  ... headerTemplate = pot_header.txt
   ... environment = testenv
   ... ''' % globals())
 
@@ -282,7 +286,7 @@ The i18nextract.py contains the following code:
   import z3c.recipe.i18n.i18nextract
   <BLANKLINE>
   if __name__ == '__main__':
-      z3c.recipe.i18n.i18nextract.main(['i18nextract', '-d', 'recipe', '-s', '/sample-buildout/parts/i18n/configure.zcml', '-o', '/sample-buildout/outputDir', '--exclude-default-domain', '--python-only', '-m', 'z3c.csvvocabulary.csvStrings', '-p', 'demo1', '-x', 'foo', '-x', 'bar'])
+      z3c.recipe.i18n.i18nextract.main(['i18nextract', '-d', 'recipe', '-s', '/sample-buildout/parts/i18n/configure.zcml', '-o', '/sample-buildout/outputDir', '--exclude-default-domain', '--python-only', '-m', 'z3c.csvvocabulary.csvStrings', '-p', 'demo1', '-x', 'foo', '-x', 'bar', '-t', '/sample-buildout/pot_header.txt'])
 
 i18nmergeall
 ------------
