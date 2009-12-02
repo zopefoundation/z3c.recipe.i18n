@@ -13,7 +13,7 @@
 ##############################################################################
 """Setup
 
-$Id:$
+$Id$
 """
 import os
 import xml.sax.saxutils
@@ -85,7 +85,7 @@ setup(
         'zc.buildout',
         'zc.recipe.egg',
         'zope.app.appsetup',
-        'zope.app.locales [extract]',
+        'zope.app.locales[extract]>=3.5.0',
         'zope.configuration',
         ],
     entry_points = {
