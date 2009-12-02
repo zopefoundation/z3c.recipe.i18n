@@ -48,6 +48,7 @@ def setUp(test):
     zc.buildout.testing.install('zope.componentvocabulary', test)
     zc.buildout.testing.install('zope.configuration', test)
     zc.buildout.testing.install('zope.container', test)
+    zc.buildout.testing.install('zope.contenttype', test)
     zc.buildout.testing.install('zope.copy', test)
     zc.buildout.testing.install('zope.copypastemove', test)
     zc.buildout.testing.install('zope.datetime', test)
