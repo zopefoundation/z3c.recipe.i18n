@@ -75,6 +75,9 @@ environment
   exported before starting the tests. Can be used for set product 
   configuration enviroment.
 
+extraPaths
+   A new line separated list of directories which are added to the PYTHONPATH.
+
 
 Test
 ****
@@ -243,6 +246,8 @@ Lets create a `buildout.cfg` file using all available arguments:
   ...                       bar
   ... headerTemplate = pot_header.txt
   ... environment = testenv
+  ... extraPaths = extra/path/1
+  ...              extra/path/2
   ... ''' % globals())
 
 Now, Let's run the buildout and see what we get:
@@ -274,7 +279,9 @@ The i18nextract.py contains the following code:
   <BLANKLINE>
   import sys
   sys.path[0:0] = [
-  ...
+      ...
+      '/sample-buildout/extra/path/1',
+      '/sample-buildout/extra/path/2',
     ]
   <BLANKLINE>
   import os
@@ -298,7 +305,9 @@ The i18nmergeall.py contains the following code:
   <BLANKLINE>
   import sys
   sys.path[0:0] = [
-  ...
+      ...
+      '/sample-buildout/extra/path/1',
+      '/sample-buildout/extra/path/2',
     ]
   <BLANKLINE>
   import z3c.recipe.i18n.i18nmergeall
@@ -316,7 +325,9 @@ The i18nstats.py contains the following code:
   <BLANKLINE>
   import sys
   sys.path[0:0] = [
-  ...
+      ...
+      '/sample-buildout/extra/path/1',
+      '/sample-buildout/extra/path/2',
     ]
   <BLANKLINE>
   import z3c.recipe.i18n.i18nstats

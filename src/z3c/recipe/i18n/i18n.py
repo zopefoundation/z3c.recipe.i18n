@@ -137,13 +137,16 @@ class I18nSetup(object):
             env = self.buildout[env_section]
             for key, value in env.items():
                 initialization += env_template % (key, value)
+        extra_paths = (
+            [this_loc] + self.options.get('extraPaths', '').split('\n'))
+        extra_paths = [p for p in extra_paths if p]
 
         # Generate i18nextract
         generated = zc.buildout.easy_install.scripts(
             [('%sextract'% self.name, 'z3c.recipe.i18n.i18nextract', 'main')],
             ws, self.options['executable'],
             self.buildout['buildout']['bin-directory'],
-            extra_paths = [this_loc],
+            extra_paths = extra_paths,
             arguments = arguments,
             initialization = initialization,
             )
@@ -157,7 +160,7 @@ class I18nSetup(object):
                   'main')],
                 ws, self.options['executable'],
                 self.buildout['buildout']['bin-directory'],
-                extra_paths = [this_loc],
+                extra_paths = extra_paths,
                 arguments = arguments,
             ))
 
@@ -170,7 +173,7 @@ class I18nSetup(object):
                   'main')],
                 ws, self.options['executable'],
                 self.buildout['buildout']['bin-directory'],
-                extra_paths = [this_loc],
+                extra_paths = extra_paths,
                 arguments = arguments,
             ))
 
@@ -183,7 +186,7 @@ class I18nSetup(object):
                   'main')],
                 ws, self.options['executable'],
                 self.buildout['buildout']['bin-directory'],
-                extra_paths = [this_loc],
+                extra_paths = extra_paths,
                 arguments = arguments,
             ))
 
