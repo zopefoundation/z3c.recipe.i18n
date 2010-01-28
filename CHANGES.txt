@@ -5,7 +5,7 @@ CHANGES
 0.6.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed test setup to run with current packages.
 
 
 0.6.0 (2009-12-02)
@@ -62,8 +62,8 @@ CHANGES
 0.5.0 (2009-09-09)
 ------------------
 
-- Implemented environment section argument support for i18nextract.py script. 
-  This is a name of a section which defines a set of environment variables that 
+- Implemented environment section argument support for i18nextract.py script.
+  This is a name of a section which defines a set of environment variables that
   should be exported before starting the extraction.
 
 - Initial Release

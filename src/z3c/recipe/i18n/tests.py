@@ -32,11 +32,10 @@ def setUp(test):
     zc.buildout.testing.install('zdaemon', test)
     zc.buildout.testing.install('zope.annotation', test)
     zc.buildout.testing.install('zope.app.applicationcontrol', test)
+    zc.buildout.testing.install('zope.applicationcontrol', test)
     zc.buildout.testing.install('zope.app.appsetup', test)
-    zc.buildout.testing.install('zope.app.basicskin', test)
     zc.buildout.testing.install('zope.app.component', test)
     zc.buildout.testing.install('zope.app.container', test)
-    zc.buildout.testing.install('zope.app.form', test)
     zc.buildout.testing.install('zope.app.locales', test)
     zc.buildout.testing.install('zope.app.pagetemplate', test)
     zc.buildout.testing.install('zope.app.publication', test)
@@ -94,10 +93,10 @@ checker = renormalizing.RENormalizing([
     (re.compile("""['"][^\n"']+z3c.recipe.i18n[^\n"']*['"],"""),
      "'/z3c.recipe.i18n',"),
     (re.compile('#![^\n]+\n'), ''),
-    (re.compile('-\S+-py\d[.]\d(-\S+)?.egg'), '-pyN.N.egg',),    
-    # the following are for compatibility with Windows  
-    (re.compile('-  .*\.exe\n'), ''),  
-    (re.compile('-script.py'), ''),  
+    (re.compile('-\S+-py\d[.]\d(-\S+)?.egg'), '-pyN.N.egg',),
+    # the following are for compatibility with Windows
+    (re.compile('-  .*\.exe\n'), ''),
+    (re.compile('-script.py'), ''),
 
     ])
 
