@@ -14,7 +14,7 @@ CHANGES
 - Feature: Added new 'headerTemplate' option that allows to specify the path
   of a customized pot header template.
 
-- Feature: Added new 'extraPahts` option that is included in the PYTHONPATH.
+- Feature: Added new 'extraPaths` option that is included in the PYTHONPATH.
   This allows for instance the use with Zope 2.11.
 
 - Makers are now called with additional keyword arguments.
