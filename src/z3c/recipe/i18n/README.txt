@@ -5,7 +5,7 @@ Translation domain extraction
 z3c.recipe.i18n
 ---------------
 
-This Zope 3 recipes offers different tools which allows to extract i18n 
+This Zope 3 recipes offers different tools which allows to extract i18n
 translation messages from egg based packages.
 
 The 'i18n' recipe can be used to generate the required scripts for extract
@@ -33,7 +33,7 @@ eggs
 packages
   The names of one or more eggs which the messages should get extracted from.
   Note, this is different to the original zope.app.locales implementation.
-  The original implementation uses one path as -d argument which assumes a 
+  The original implementation uses one path as -d argument which assumes a
   specific zope.* package structure with an old style trunk setup.
 
 domain
@@ -45,14 +45,14 @@ output
 maker
   One or more module name which can get used as additional maker. This module
   must be located in the python path because it get resolved by
-  zope.configuration.name.resolve. For a sample maker see 
+  zope.configuration.name.resolve. For a sample maker see
   z3c.csvvocabulary.csvStrings.
   Makers are called with these arguments: 'path', 'base_path', 'exclude_dirs',
   'domain', 'include_default_domain' and 'site_zcml'. The return value has to
   be a catalog dictionary.
 
 zcml (required)
-  The contents of configuration used for extraction. Normaly used for load 
+  The contents of configuration used for extraction. Normaly used for load
   meta configuration.
 
 excludeDefaultDomain (optional, default=False)
@@ -63,16 +63,21 @@ excludeDefaultDomain (optional, default=False)
 pythonOnly (optional, default=False)
   Only extract message ids from Python (False if not used)
 
+verify_domain (optional, default=False)
+  Retrieve all the messages in all the domains in python files when
+  verify_domain is False otherwise only retrive the messages of the
+  specified domain. (False if not used)
+
 exludeDirectoryName (optional, default=[])
-  Allows to specify one or more directory name, relative to the package, to 
+  Allows to specify one or more directory name, relative to the package, to
   exclude. (None if not used)
 
 headerTemplate (optional, default=None)
   The path of the pot header template relative to the buildout directory.
 
 environment
-  A section name defining a set of environment variables that should be 
-  exported before starting the tests. Can be used for set product 
+  A section name defining a set of environment variables that should be
+  exported before starting the tests. Can be used for set product
   configuration enviroment.
 
 extraPaths
@@ -91,7 +96,7 @@ Lets define some (bogus) eggs that we can use in our application:
   ... from setuptools import setup
   ... setup(name = 'demo1')
   ... ''')
-  
+
   >>> mkdir('demo2')
   >>> write('demo2', 'setup.py',
   ... '''
@@ -242,6 +247,7 @@ Lets create a `buildout.cfg` file using all available arguments:
   ... maker = z3c.csvvocabulary.csvStrings
   ... excludeDefaultDomain = true
   ... pythonOnly = true
+  ... verify_domain = true
   ... exludeDirectoryName = foo
   ...                       bar
   ... headerTemplate = pot_header.txt
@@ -293,7 +299,7 @@ The i18nextract.py contains the following code:
   import z3c.recipe.i18n.i18nextract
   <BLANKLINE>
   if __name__ == '__main__':
-      z3c.recipe.i18n.i18nextract.main(['i18nextract', '-d', 'recipe', '-s', '/sample-buildout/parts/i18n/configure.zcml', '-o', '/sample-buildout/outputDir', '--exclude-default-domain', '--python-only', '-m', 'z3c.csvvocabulary.csvStrings', '-p', 'demo1', '-x', 'foo', '-x', 'bar', '-t', '/sample-buildout/pot_header.txt'])
+      z3c.recipe.i18n.i18nextract.main(['i18nextract', '-d', 'recipe', '-s', '/sample-buildout/parts/i18n/configure.zcml', '-o', '/sample-buildout/outputDir', '--exclude-default-domain', '--python-only', '--verify-domain', '-m', 'z3c.csvvocabulary.csvStrings', '-p', 'demo1', '-x', 'foo', '-x', 'bar', '-t', '/sample-buildout/pot_header.txt'])
 
 i18nmergeall
 ------------

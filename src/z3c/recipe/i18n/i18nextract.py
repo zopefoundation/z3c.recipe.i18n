@@ -16,8 +16,8 @@
 Page Templates and ZCML located in egg packages.
 
 This tool will extract all findable message strings from all
-internationalizable files in your defined eggs product. It only extracts 
-message ids of the specified domain. It defaults to the 'z3c' domain and the 
+internationalizable files in your defined eggs product. It only extracts
+message ids of the specified domain. It defaults to the 'z3c' domain and the
 z3c package whihc use the shared 'z3c' i18n namespace.
 
 Note: The Python Code extraction tool does not support domain
@@ -53,6 +53,8 @@ Options:
         May be used more than once.
     --python-only
         Only extract message ids from Python
+    --verify-domain
+        Only retrieve the messages of the specified domains in the python files.
     -t <path>
         Specifies the file path of the header template.
 
@@ -118,7 +120,7 @@ def usage(code, msg=''):
 
 def zcml_strings(path, domain="zope", site_zcml=None):
     """Retrieve all ZCML messages from `dir` that are in the `domain`.
-    
+
     Note, the pot maker runs in a loop for each package and the maker collects
     only the given messages from such a package by the given path. This allows
     us to collect messages from eggs and external packages. This also prevents
@@ -151,7 +153,7 @@ def main(argv=sys.argv):
             argv[1:],
             'hed:s:i:m:p:o:x:t:',
             ['help', 'domain=', 'site_zcml=', 'path=', 'python-only',
-             'exclude-default-domain'])
+             'verify-domain', 'exclude-default-domain'])
     except getopt.error, msg:
         usage(1, msg)
 
@@ -160,6 +162,7 @@ def main(argv=sys.argv):
     output_dir = None
     exclude_dirs = []
     python_only = False
+    verify_domain = False
     site_zcml = None
     makers = []
     eggPaths = []
@@ -181,6 +184,8 @@ def main(argv=sys.argv):
             exclude_dirs.append(arg)
         elif opt in ('--python-only',):
             python_only = True
+        elif opt in ('--verify-domain'):
+            verify_domain = True
         elif opt in ('-p', '--package'):
             package = resolve(arg)
             path = os.path.dirname(package.__file__)
@@ -204,9 +209,10 @@ def main(argv=sys.argv):
           "exclude dirs:           %r\n" \
           "include default domain: %r\n" \
           "python only:            %r\n" \
+          "verify domain:          %r\n" \
           "header template:        %r\n" \
           % (domain, site_zcml, exclude_dirs, include_default_domain,
-             python_only, header_template)
+             python_only, verify_domain, header_template)
 
     # setup pot maker
     maker = POTMaker(output_file, '', header_template)
@@ -226,7 +232,9 @@ def main(argv=sys.argv):
               "path:    %r\n" \
               % (pkgPath, basePath, path)
 
-        maker.add(py_strings(path, domain, exclude=exclude_dirs), basePath)
+        maker.add(py_strings(path, domain, exclude=exclude_dirs,
+                             verify_domain=verify_domain),
+                  basePath)
         if not python_only:
             maker.add(zcml_strings(path, domain, site_zcml), basePath)
             maker.add(tal_strings(path, domain, include_default_domain,

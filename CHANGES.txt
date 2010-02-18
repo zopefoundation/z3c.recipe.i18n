@@ -7,6 +7,11 @@ CHANGES
 
 - Fixed test setup to run with current packages.
 
+- Added buildout option `verify_domain`. When set to ``true``
+  i18nextract only retrives the message ids of specified domain from
+  python files. Otherwise (default and previous behavior) all messages
+  ids in all domains in python files are retrieved.
+
 
 0.6.0 (2009-12-02)
 ------------------

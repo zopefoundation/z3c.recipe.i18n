@@ -67,7 +67,8 @@ class I18nSetup(object):
         excludeDefaultDomain = self.options.get('excludeDefaultDomain',
             False)
 
-        pythonOnly = self.options.get('pythonOnly', False) 
+        pythonOnly = self.options.get('pythonOnly', False)
+        verify_domain = self.options.get('verify_domain', False)
 
         # setup configuration file
         zcml = self.options.get('zcml', None)
@@ -108,6 +109,9 @@ class I18nSetup(object):
         if pythonOnly:
             arguments.extend(['--python-only'])
 
+        if verify_domain:
+            arguments.extend(['--verify-domain'])
+
         makers = [m for m in self.options.get('maker', '').split() if m!='']
         for m in makers:
             arguments.extend(['-m', m])
@@ -118,7 +122,7 @@ class I18nSetup(object):
         for p in packages:
             arguments.extend(['-p', p])
 
-        exludeDirNames = [x for x 
+        exludeDirNames = [x for x
                           in self.options.get('exludeDirectoryName', '').split()
                           if x!='']
         for x in exludeDirNames:
