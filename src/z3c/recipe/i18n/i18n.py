@@ -23,6 +23,8 @@ import zc.buildout
 import zc.recipe.egg
 
 import pkg_resources
+from xml.dom.minidom import parseString
+from xml.parsers.expat import ExpatError
 
 this_loc = pkg_resources.working_set.find(
     pkg_resources.Requirement.parse('z3c.recipe.i18n')).location
@@ -74,7 +76,12 @@ class I18nSetup(object):
         zcml = self.options.get('zcml', None)
         if zcml is None:
             raise zc.buildout.UserError('No zcml configuration defined.')
-        zcml = zcmlTemplate % zcml
+        try:
+            parseString(zcml)
+        except ExpatError:
+            zcml = open(zcml).read()
+        else:
+            zcml = zcmlTemplate % zcml
 
         # get domain
         domain = self.options.get('domain', None)

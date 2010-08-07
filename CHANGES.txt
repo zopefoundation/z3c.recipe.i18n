@@ -2,11 +2,11 @@
 CHANGES
 =======
 
-0.7.1 (unreleased)
+0.8.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Feature: The value of `zcml` option could be path to ZCML file
+  or ZCML string.
 
 0.7.0 (2010-02-18)
 ------------------

@@ -52,8 +52,8 @@ maker
   be a catalog dictionary.
 
 zcml (required)
-  The contents of configuration used for extraction. Normaly used for load
-  meta configuration.
+  The contents of configuration used for extraction.  Normaly used for load meta
+  configuration.  This value could be path to ZCML file or ZCML string.
 
 excludeDefaultDomain (optional, default=False)
   Exclude all messages found as part of the default domain. Messages are in
@@ -97,13 +97,6 @@ Lets define some (bogus) eggs that we can use in our application:
   ... setup(name = 'demo1')
   ... ''')
 
-  >>> mkdir('demo2')
-  >>> write('demo2', 'setup.py',
-  ... '''
-  ... from setuptools import setup
-  ... setup(name = 'demo2', install_requires='demo1')
-  ... ''')
-
 Now check if the setup was correct:
 
   >>> ls('bin')
@@ -123,7 +116,7 @@ Lets create a minimal `buildout.cfg` file:
   ... packages = demo1
   ... domain = recipe
   ... output = outputDir
-  ... zcml = <include package="z3c.recipe.tests" file="extract.zcml" />"
+  ... zcml = <include package="z3c.recipe.tests" file="extract.zcml" />
   ... ''' % globals())
 
 Now, Let's run the buildout and see what we get:
@@ -144,6 +137,53 @@ After running buildout, the bin folder contains the different i18n script:
   -  i18nextract
   -  i18nmergeall
   -  i18nstats
+
+Test ZCML file path
+-------------------
+
+  >>> write('demo1', 'site.zcml',
+  ... '''
+  ... ''')
+  >>> zcml = join('demo1', 'site.zcml')
+
+Lets create a minimal `buildout.cfg` file with `zcml` option pointing
+to a path:
+
+  >>> write('buildout.cfg',
+  ... '''
+  ... [buildout]
+  ... parts = i18n
+  ... offline = true
+  ...
+  ... [i18n]
+  ... recipe = z3c.recipe.i18n:i18n
+  ... eggs = z3c.recipe.i18n
+  ... packages = demo1
+  ... domain = recipe
+  ... output = outputDir
+  ... zcml = %(zcml)s
+  ... ''' % globals())
+
+Now, Let's run the buildout and see what we get:
+
+  >>> print system(join('bin', 'buildout')),
+  Uninstalling i18n.
+  Installing i18n.
+  i18n: setting up i18n tools
+  Generated script '/sample-buildout/bin/i18nextract'.
+  Generated script '/sample-buildout/bin/i18nmergeall'.
+  Generated script '/sample-buildout/bin/i18nstats'.
+  Generated script '/sample-buildout/bin/i18ncompile'.
+
+After running buildout, the bin folder contains the different i18n script:
+
+  >>> ls('bin')
+  -  buildout
+  -  i18ncompile
+  -  i18nextract
+  -  i18nmergeall
+  -  i18nstats
+
 
 i18nextract
 -----------
@@ -243,7 +283,7 @@ Lets create a `buildout.cfg` file using all available arguments:
   ... packages = demo1
   ... domain = recipe
   ... output = outputDir
-  ... zcml = <include package="z3c.recipe.tests" file="extract.zcml" />"
+  ... zcml = <include package="z3c.recipe.tests" file="extract.zcml" />
   ... maker = z3c.csvvocabulary.csvStrings
   ... excludeDefaultDomain = true
   ... pythonOnly = true
