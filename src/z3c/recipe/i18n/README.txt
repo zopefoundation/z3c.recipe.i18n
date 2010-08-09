@@ -52,8 +52,10 @@ maker
   be a catalog dictionary.
 
 zcml (required)
-  The contents of configuration used for extraction. Normaly used for load
-  meta configuration.
+  The contents of configuration used for extraction.  Normaly used for load meta
+  configuration.  Note: To include a ZCML file outside package, you can use,
+  ``include`` directive with ``file`` option.  For example: ``<include
+  file="${buildout:directory}/etc/site.zcml" />``
 
 excludeDefaultDomain (optional, default=False)
   Exclude all messages found as part of the default domain. Messages are in
