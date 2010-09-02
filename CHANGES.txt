@@ -5,7 +5,8 @@ CHANGES
 0.7.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Using python's `doctest` module instead of deprecated
+  `zope.testing.doctest`.
 
 
 0.7.0 (2010-02-18)

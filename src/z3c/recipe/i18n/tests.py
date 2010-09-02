@@ -12,11 +12,10 @@
 #
 ##############################################################################
 
+from zope.testing import renormalizing
+import doctest
 import re
-
 import unittest
-from zope.testing import doctest, renormalizing
-
 import zc.buildout.testing
 
 
@@ -108,7 +107,3 @@ def test_suite():
             optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
             checker=checker),
         )
-
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')
