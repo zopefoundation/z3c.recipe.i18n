@@ -28,6 +28,7 @@ def setUp(test):
     zc.buildout.testing.install('transaction', test)
     zc.buildout.testing.install('zc.lockfile', test)
     zc.buildout.testing.install('zc.recipe.egg', test)
+    zc.buildout.testing.install('z3c.recipe.scripts', test)
     zc.buildout.testing.install('zdaemon', test)
     zc.buildout.testing.install('zope.annotation', test)
     zc.buildout.testing.install('zope.app.applicationcontrol', test)

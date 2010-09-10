@@ -18,7 +18,7 @@ Page Templates and ZCML located in egg packages.
 This tool will extract all findable message strings from all
 internationalizable files in your defined eggs product. It only extracts
 message ids of the specified domain. It defaults to the 'z3c' domain and the
-z3c package whihc use the shared 'z3c' i18n namespace.
+z3c packages which use the shared 'z3c' i18n namespace.
 
 Note: The Python Code extraction tool does not support domain
       registration, so that all message strings are returned for

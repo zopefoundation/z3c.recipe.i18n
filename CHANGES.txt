@@ -2,11 +2,15 @@
 CHANGES
 =======
 
-0.7.1 (unreleased)
+0.8.0 (unreleased)
 ------------------
 
 - Using python's `doctest` module instead of deprecated
   `zope.testing.doctest`.
+
+- Support new features of zc.buildout 1.5 line.
+
+- Typo change in configuration: exludeDirNames becomes excludeDirNames
 
 
 0.7.0 (2010-02-18)
