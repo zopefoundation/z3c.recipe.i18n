@@ -63,7 +63,6 @@ setup(
         test = [
             'zope.testing',
             'zc.lockfile',
-            'zope.app.component',
             'zope.app.publication',
             'zope.component',
             'zope.configuration',

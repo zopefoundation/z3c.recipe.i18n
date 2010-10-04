@@ -5,6 +5,9 @@ CHANGES
 0.7.1 (unreleased)
 ------------------
 
+- Fixed test setup to run with current zopetoolkit packages.
+  Made sure tests still run on older platforms, particularly Zope 2.12.
+
 - Using python's `doctest` module instead of deprecated
   `zope.testing.doctest`.
 
