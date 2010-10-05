@@ -13,8 +13,8 @@ CHANGES
 
 - Support new features of zc.buildout 1.5 line.
 
-- Typo change in configuration: exludeDirNames becomes excludeDirNames
-
+- Typo change in configuration: exludeDirNames becomes excludeDirNames (old
+  name is still supported for backward compatibility).
 
 0.7.0 (2010-02-18)
 ------------------
