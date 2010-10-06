@@ -110,6 +110,8 @@ checker = renormalizing.RENormalizing([
     # the following are for compatibility with Windows
     (re.compile('-  .*\.exe\n'), ''),
     (re.compile('-script.py'), ''),
+    (re.compile(r'\\[\\]?'), '/'),
+    (re.compile('outputDir'), 'outputdir'),
     ])
 
 

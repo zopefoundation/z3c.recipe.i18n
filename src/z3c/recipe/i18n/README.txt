@@ -616,7 +616,7 @@ original_paths are included.
       base = os.path.dirname(os.path.abspath(os.path.realpath(__file__)))
       base = os.path.dirname(base)
       base = os.path.dirname(base)
-      setuptools_path = join(base, 'eggs/...-pyN.N.egg')
+      setuptools_path = ...
       sys.path.append(setuptools_path)
       known_paths.add(os.path.normcase(setuptools_path))
       import pkg_resources
