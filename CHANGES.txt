@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-0.8.0 (unreleased)
+0.8.0 (2010-10-07)
 ------------------
 
 - Depend on and use the new features of the zc.buildout 1.5 line. At the same
