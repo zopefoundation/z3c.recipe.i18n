@@ -5,8 +5,8 @@ CHANGES
 0.8.0 (unreleased)
 ------------------
 
-- Support new features of zc.buildout 1.5 line. At the same time support for
-  zc.buildout <= 1.5.1 has been dropped.
+- Depend on and use the new features of the zc.buildout 1.5 line. At the same
+  time support for zc.buildout <= 1.5.1 has been dropped.
 
 - Fixed test setup to run with current zopetoolkit packages.
   Made sure tests still run on older platforms, particularly Zope 2.12.
