@@ -81,10 +81,10 @@ setup(
         ),
     install_requires = [
         'setuptools',
-        'zc.buildout',
-        'z3c.recipe.scripts',
+        'zc.buildout >= 1.5.1',
+        'z3c.recipe.scripts >= 1.0.1',
         'zope.app.appsetup',
-        'zope.app.locales[extract]>=3.5.0',
+        'zope.app.locales[extract] >= 3.5.0',
         'zope.configuration',
         ],
     entry_points = {
