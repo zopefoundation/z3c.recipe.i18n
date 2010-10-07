@@ -33,13 +33,13 @@ setup(
     long_description=(
         read('README.txt')
         + '\n\n' +
+        read('CHANGES.txt')
+        + '\n\n' +
         '**********************\n'
         'Detailed Documentation\n'
         '**********************'
         + '\n\n' +
         read('src', 'z3c', 'recipe', 'i18n', 'README.txt')
-        + '\n\n' +
-        read('CHANGES.txt')
         ),
     license = 'ZPL 2.1',
     keywords = 'zope3 z3c i18n locales extraction recipe',
