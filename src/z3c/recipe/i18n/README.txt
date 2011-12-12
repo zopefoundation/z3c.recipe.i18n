@@ -219,8 +219,8 @@ The i18nextract.py contains the following code:
   import os
   path = sys.path[0]
   if os.environ.get('PYTHONPATH'):
-      os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ['PYTHONPATH']
       path = os.pathsep.join([path, os.environ['PYTHONPATH']])
+  os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ.get('PYTHONPATH', '')
   os.environ['PYTHONPATH'] = path
   import site # imports custom buildout-generated site.py
   import os
@@ -254,8 +254,8 @@ The i18nmergeall.py contains the following code:
   import os
   path = sys.path[0]
   if os.environ.get('PYTHONPATH'):
-      os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ['PYTHONPATH']
       path = os.pathsep.join([path, os.environ['PYTHONPATH']])
+  os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ.get('PYTHONPATH', '')
   os.environ['PYTHONPATH'] = path
   import site # imports custom buildout-generated site.py
   <BLANKLINE>
@@ -280,8 +280,8 @@ The i18nstats.py contains the following code:
   import os
   path = sys.path[0]
   if os.environ.get('PYTHONPATH'):
-      os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ['PYTHONPATH']
       path = os.pathsep.join([path, os.environ['PYTHONPATH']])
+  os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ.get('PYTHONPATH', '')
   os.environ['PYTHONPATH'] = path
   import site # imports custom buildout-generated site.py
   <BLANKLINE>
@@ -306,8 +306,8 @@ The i18ncompile.py contains the following code:
   import os
   path = sys.path[0]
   if os.environ.get('PYTHONPATH'):
-      os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ['PYTHONPATH']
       path = os.pathsep.join([path, os.environ['PYTHONPATH']])
+  os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ.get('PYTHONPATH', '')
   os.environ['PYTHONPATH'] = path
   import site # imports custom buildout-generated site.py
   <BLANKLINE>
@@ -387,8 +387,8 @@ The i18nextract.py contains the following code:
   import os
   path = sys.path[0]
   if os.environ.get('PYTHONPATH'):
-      os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ['PYTHONPATH']
       path = os.pathsep.join([path, os.environ['PYTHONPATH']])
+  os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ.get('PYTHONPATH', '')
   os.environ['PYTHONPATH'] = path
   import site # imports custom buildout-generated site.py
   import os
@@ -422,6 +422,7 @@ The site.py has inserted the extraPaths.
       """Add site packages, as determined by zc.buildout.
   <BLANKLINE>
       See original_addsitepackages, below, for the original version."""
+      ...
       buildout_paths = [
           ...
           '/sample-buildout/extra/path/1',
@@ -432,6 +433,7 @@ The site.py has inserted the extraPaths.
           if not sitedircase in known_paths and os.path.exists(sitedir):
               sys.path.append(sitedir)
               known_paths.add(sitedircase)
+      ...
       return known_paths
   <BLANKLINE>
   ...
@@ -452,8 +454,8 @@ The i18nmergeall.py contains the following code:
   import os
   path = sys.path[0]
   if os.environ.get('PYTHONPATH'):
-      os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ['PYTHONPATH']
       path = os.pathsep.join([path, os.environ['PYTHONPATH']])
+  os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ.get('PYTHONPATH', '')
   os.environ['PYTHONPATH'] = path
   import site # imports custom buildout-generated site.py
   <BLANKLINE>
@@ -478,8 +480,8 @@ The i18nstats.py contains the following code:
   import os
   path = sys.path[0]
   if os.environ.get('PYTHONPATH'):
-      os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ['PYTHONPATH']
       path = os.pathsep.join([path, os.environ['PYTHONPATH']])
+  os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ.get('PYTHONPATH', '')
   os.environ['PYTHONPATH'] = path
   import site # imports custom buildout-generated site.py
   <BLANKLINE>
@@ -573,8 +575,8 @@ The i18nextract.py contains the following code:
   import os
   path = sys.path[0]
   if os.environ.get('PYTHONPATH'):
-      os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ['PYTHONPATH']
       path = os.pathsep.join([path, os.environ['PYTHONPATH']])
+  os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ.get('PYTHONPATH', '')
   os.environ['PYTHONPATH'] = path
   import site # imports custom buildout-generated site.py
   import os
@@ -664,8 +666,8 @@ The i18nmergeall.py contains the following code:
   import os
   path = sys.path[0]
   if os.environ.get('PYTHONPATH'):
-      os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ['PYTHONPATH']
       path = os.pathsep.join([path, os.environ['PYTHONPATH']])
+  os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ.get('PYTHONPATH', '')
   os.environ['PYTHONPATH'] = path
   import site # imports custom buildout-generated site.py
   <BLANKLINE>
@@ -696,8 +698,8 @@ The i18nstats.py contains the following code:
   import os
   path = sys.path[0]
   if os.environ.get('PYTHONPATH'):
-      os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ['PYTHONPATH']
       path = os.pathsep.join([path, os.environ['PYTHONPATH']])
+  os.environ['BUILDOUT_ORIGINAL_PYTHONPATH'] = os.environ.get('PYTHONPATH', '')
   os.environ['PYTHONPATH'] = path
   import site # imports custom buildout-generated site.py
   <BLANKLINE>

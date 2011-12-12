@@ -24,6 +24,7 @@ def setUp(test):
     zc.buildout.testing.install('ZConfig', test)
     zc.buildout.testing.install('ZODB3', test)
     zc.buildout.testing.install('pytz', test)
+    zc.buildout.testing.install('six', test)
     zc.buildout.testing.install('transaction', test)
     zc.buildout.testing.install('zc.lockfile', test)
     zc.buildout.testing.install('zc.recipe.egg', test)
