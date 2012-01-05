@@ -30,6 +30,7 @@ $Id:$
 """
 import sys
 import os
+import subprocess
 import getopt
 
 def usage(code, msg=''):
@@ -46,8 +47,9 @@ def merge(path):
             break
     domain = pot_name[:-4]
     potPath = os.path.join(path, domain+'.pot')
-    
-    for language in os.listdir(path):
+
+    failed = []
+    for language in sorted(os.listdir(path)):
         lc_messages_path = os.path.join(path, language, 'LC_MESSAGES')
 
         # Make sure we got a language directory
@@ -60,10 +62,13 @@ def merge(path):
             poFile.write(open(potPath, 'rb').read())
             poFile.close()
 
-        msgs = []
         print 'Merging language "%s", domain "%s"' %(language, domain)
-        os.system('msgmerge -U %s %s' %(poPath, potPath))
+        rc = subprocess.call(['msgmerge', '-U', poPath, potPath])
+        if rc != 0:
+            failed.append(language)
 
+    if failed:
+        sys.exit('msgmerge failed for %s' % ', '.join(failed))
 
 def main(argv=sys.argv):
     try:

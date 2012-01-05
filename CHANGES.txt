@@ -5,7 +5,9 @@ CHANGES
 0.8.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Exit with a non-zero status code when one or more msgmerge calls fail.
+
+- Use subprocess instead of os.system.
 
 
 0.8.0 (2010-10-07)
