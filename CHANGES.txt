@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-0.8.1 (unreleased)
+0.8.1 (2012-01-06)
 ------------------
 
 - Exit with a non-zero status code when one or more msgmerge calls fail.
