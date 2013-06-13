@@ -85,63 +85,6 @@ environment
 extraPaths
    A new line separated list of directories which are added to the PYTHONPATH.
 
-relative-paths
-    Use egg, test, and working-directory paths relative to the test script.
-
-include-site-packages
-    You can choose to have the site-packages of the underlying Python
-    available to your script or interpreter, in addition to the packages
-    from your eggs.  See `the z3c.recipe.scripts documentation`_ for
-    motivations and warnings.  You can just set this in your [buildout]
-    section or override it in the recipe's section.
-
-allowed-eggs-from-site-packages
-    Sometimes you need or want to control what eggs from site-packages are
-    used. The allowed-eggs-from-site-packages option allows you to specify a
-    whitelist of project names that may be included from site-packages.  You
-    can use globs to specify the value.  It defaults to a single value of '*',
-    indicating that any package may come from site-packages.
-
-    Here's a usage example::
-
-        [buildout]
-        ...
-
-        allowed-eggs-from-site-packages =
-            demo
-            bigdemo
-            zope.*
-
-    This option interacts with the ``include-site-packages`` option in the
-    following ways.
-
-    If ``include-site-packages`` is true, then
-    ``allowed-eggs-from-site-packages`` filters what eggs from site-packages
-    may be chosen.  Therefore, if ``allowed-eggs-from-site-packages`` is an
-    empty list, then no eggs from site-packages are chosen, but site-packages
-    will still be included at the end of path lists.
-
-    If ``include-site-packages`` is false, the value of
-    ``allowed-eggs-from-site-packages`` is irrelevant.
-
-    You can just set this in your [buildout] section or override it in
-    the recipe's section.
-
-extends
-    You can extend another section using this value.  It is intended to help
-    you avoid repeating yourself.
-
-exec-sitecustomize
-    Normally the Python's real sitecustomize module is not processed.
-    If you want it to be processed, set this value to 'true'.  This will
-    be honored irrespective of the setting for include-site-packages.
-
-    You can just set this in your [buildout] section or override it in
-    the recipe's section.
-
-.. _`the z3c.recipe.scripts documentation`:
-    http://pypi.python.org/pypi/z3c.recipe.scripts#including-site-packages-and-sitecustomize
-
 Test
 ****
 
