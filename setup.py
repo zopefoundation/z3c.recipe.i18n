@@ -11,12 +11,8 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Setup
 
-$Id$
-"""
 import os
-import xml.sax.saxutils
 from setuptools import setup, find_packages
 
 
