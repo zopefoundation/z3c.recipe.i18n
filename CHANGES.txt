@@ -2,10 +2,10 @@
 CHANGES
 =======
 
-0.8.2 (unreleased)
+0.9.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Depend on zc.buildout 2.0+. Features introduced with zc.buildout 1.5 are removed (don't work with the 2.x branch).
 
 
 0.8.1 (2012-01-06)
