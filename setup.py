@@ -11,12 +11,8 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Setup
 
-$Id$
-"""
 import os
-import xml.sax.saxutils
 from setuptools import setup, find_packages
 
 
@@ -26,7 +22,7 @@ def read(*rnames):
 
 setup(
     name = 'z3c.recipe.i18n',
-    version='0.8.2dev',
+    version='0.9.0dev',
     author = 'Roger Ineichen and the Zope Community',
     author_email = 'zope-dev@zope.org',
     description = 'Zope3 egg based i18n locales extration recipes',
@@ -81,8 +77,8 @@ setup(
         ),
     install_requires = [
         'setuptools',
-        'zc.buildout >= 1.5.1',
-        'z3c.recipe.scripts >= 1.0.1',
+        'zc.buildout >= 2.0.0',
+        'zc.recipe.egg',
         'zope.app.appsetup',
         'zope.app.locales[extract] >= 3.5.0',
         'zope.configuration',
