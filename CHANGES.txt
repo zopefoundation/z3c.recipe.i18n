@@ -7,6 +7,8 @@ CHANGES
 
 - Depend on zc.buildout 2.0+. Features introduced with zc.buildout 1.5 are removed (don't work with the 2.x branch).
 
+- Update trove classifiers to show that this package is currently only
+  compatible with Python 2.7.
 
 0.8.1 (2012-01-06)
 ------------------
