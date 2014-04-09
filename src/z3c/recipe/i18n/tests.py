@@ -42,7 +42,6 @@ def setUp(test):
         # BBB: for running tests with zopetoolkit < 1.0, e.g. Zope 2.12
         pass
     zc.buildout.testing.install('zope.authentication', test)
-    zc.buildout.testing.install('zope.broken', test)
     zc.buildout.testing.install('zope.browser', test)
     zc.buildout.testing.install('zope.component', test)
     zc.buildout.testing.install('zope.configuration', test)
