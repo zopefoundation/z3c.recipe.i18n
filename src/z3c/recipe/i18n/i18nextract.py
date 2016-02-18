@@ -12,6 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from __future__ import print_function
 """Program to extract internationalization markup from Python Code,
 Page Templates and ZCML located in egg packages.
 
@@ -101,8 +102,7 @@ class POTMaker(POTMaker):
                                  'encoding': DEFAULT_ENCODING})
 
         # Sort the catalog entries by filename
-        catalog = self.catalog.values()
-        catalog.sort()
+        catalog = sorted(self.catalog.values())
 
         # Write each entry to the file
         for entry in catalog:
@@ -113,9 +113,9 @@ class POTMaker(POTMaker):
 
 def usage(code, msg=''):
     # Python 2.1 required
-    print >> sys.stderr, __doc__
+    print(__doc__, file=sys.stderr)
     if msg:
-        print >> sys.stderr, msg
+        print(msg, file=sys.stderr)
     sys.exit(code)
 
 
@@ -167,7 +167,7 @@ def main(argv=sys.argv):
             'hed:s:i:m:p:o:x:t:',
             ['help', 'domain=', 'site_zcml=', 'path=', 'python-only',
              'verify-domain', 'exclude-default-domain'])
-    except getopt.error, msg:
+    except getopt.error as msg:
         usage(1, msg)
 
     domain = 'z3c'
@@ -217,7 +217,7 @@ def main(argv=sys.argv):
             os.mkdir(output_dir)
         output_file = os.path.join(output_dir, output_file)
 
-    print "domain:                 %r\n" \
+    print("domain:                 %r\n" \
           "configuration:          %s\n" \
           "exclude dirs:           %r\n" \
           "include default domain: %r\n" \
@@ -225,7 +225,7 @@ def main(argv=sys.argv):
           "verify domain:          %r\n" \
           "header template:        %r\n" \
           % (domain, site_zcml, exclude_dirs, include_default_domain,
-             python_only, verify_domain, header_template)
+             python_only, verify_domain, header_template))
 
     # setup pot maker
     maker = POTMaker(output_file, '', header_template)
@@ -240,10 +240,10 @@ def main(argv=sys.argv):
             basePath = basePath[:mIdx]
         pkgPath = path[len(basePath):]
 
-        print "package: %r\n" \
+        print("package: %r\n" \
               "base:    %r\n" \
               "path:    %r\n" \
-              % (pkgPath, basePath, path)
+              % (pkgPath, basePath, path))
 
         maker.add(py_strings(path, domain, exclude=exclude_dirs,
                              verify_domain=verify_domain),
@@ -268,7 +268,7 @@ def main(argv=sys.argv):
                 maker.add(maker_func(path, basePath, exclude_dirs), basePath)
 
     maker.write()
-    print "output: %r\n" % output_file
+    print("output: %r\n" % output_file)
 
 
 if __name__ == '__main__':

@@ -63,9 +63,8 @@ setup(
     namespace_packages = ['z3c', 'z3c.recipe'],
     extras_require = dict(
         test = [
-            'zope.component'
+            'zope.component',
             'zope.configuration',
-            'zope.event',
             'zope.event',
             'zope.i18nmessageid',
             'zope.interface',
@@ -88,4 +87,5 @@ setup(
              'i18n = z3c.recipe.i18n.i18n:I18nSetup',
          ]
     },
+    test_suite = 'z3c.recipe.i18n',
 )

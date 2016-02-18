@@ -129,7 +129,7 @@ Lets create a minimal `buildout.cfg` file:
 
 Now, Let's run the buildout and see what we get:
 
-  >>> print system(join('bin', 'buildout')),
+  >>> print(system(join('bin', 'buildout')))
   Installing i18n.
   i18n: setting up i18n tools
   Generated script '/sample-buildout/bin/i18nextract'.

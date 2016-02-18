@@ -12,6 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from __future__ import print_function
 """Translation Statistics Utility
 
 Utility to determine the status of the translations.
@@ -39,9 +40,9 @@ MSGDONE = 4
 
 def usage(code, msg=''):
     """Display help."""
-    print >> sys.stderr, '\n'.join(__doc__.split('\n')[:-2])
+    print('\n'.join(__doc__.split('\n')[:-2]), file=sys.stderr)
     if msg:
-        print >> sys.stderr, '** Error: ' + str(msg) + ' **'
+        print('** Error: ' + str(msg) + ' **', file=sys.stderr)
     sys.exit(code)
 
 
@@ -65,12 +66,12 @@ def getMessageDictionary(file):
             status = COMMENT
 
         elif line.startswith('msgid'):
-            line = line[6:] 
+            line = line[6:]
             line_number = line_counter
             status = MSGID
 
         elif line.startswith('msgstr'):
-            line = line[7:] 
+            line = line[7:]
             status = MSGSTR
 
         elif line == '':
@@ -103,10 +104,9 @@ def getMessageDictionary(file):
 
 
 def stats(path):
-    print 'Language    Total    Done    Not Done    Fuzzy      Done %'
-    print '=========================================================='
-    languages = os.listdir(path)
-    languages.sort()
+    print('Language    Total    Done    Not Done    Fuzzy      Done %')
+    print('==========================================================')
+    languages = sorted(os.listdir(path))
     for language in languages:
         lc_messages_path = os.path.join(path, language, 'LC_MESSAGES')
 
@@ -122,7 +122,7 @@ def stats(path):
                 msgs += getMessageDictionary(file)
 
         # We are dealing with the default language, which always has just one
-        # message string for the meta data (which is not recorded). 
+        # message string for the meta data (which is not recorded).
         if len(msgs) == 0:
             continue
 
@@ -139,8 +139,8 @@ def stats(path):
         line += ' '*(9-len(str(fuzzy))) + str(fuzzy)
         pd_str = '%0.2f %%' %percent_done
         line += ' '*(12-len(pd_str)) + pd_str
-        print line
-    
+        print(line)
+
 
 def main(argv=sys.argv):
     try:
@@ -148,7 +148,7 @@ def main(argv=sys.argv):
             argv[1:],
             'l:h',
             ['help', 'locals-dir='])
-    except getopt.error, msg:
+    except getopt.error as msg:
         usage(1, msg)
 
     path = None
@@ -158,7 +158,7 @@ def main(argv=sys.argv):
         elif opt in ('-l', '--locales-dir'):
             cwd = os.getcwd()
             # This is for symlinks. Thanks to Fred for this trick.
-            if os.environ.has_key('PWD'):
+            if 'PWD' in os.environ:
                 cwd = os.environ['PWD']
             path = os.path.normpath(os.path.join(cwd, arg))
 
