@@ -85,7 +85,6 @@ setup(
         'setuptools',
         'zc.buildout >= 2.0.0',
         'zc.recipe.egg',
-        'zope.app.appsetup',
         'zope.app.locales[extract] >= 3.5.0',
         'zope.configuration',
         ],

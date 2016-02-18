@@ -70,6 +70,7 @@ from zope.app.locales.extract import pot_header as _DEFAULT_POT_HEADER
 from zope.app.locales.extract import POTMaker
 from zope.app.locales.extract import py_strings
 from zope.app.locales.extract import tal_strings
+from zope.app.locales.extract import zcml_strings
 from zope.configuration.name import resolve
 
 
@@ -118,6 +119,8 @@ def usage(code, msg=''):
     sys.exit(code)
 
 
+# This is copied from zope.app.locales Py3 branch, and can be imported from
+# there once it's merged and released.
 def zcml_strings(path, domain="zope", site_zcml=None):
     """Retrieve all ZCML messages from `dir` that are in the `domain`.
 
@@ -127,8 +130,18 @@ def zcml_strings(path, domain="zope", site_zcml=None):
     to collect the same message more then one time since we use the same zcml
     configuration for each package path.
     """
-    from zope.app.appsetup import config
-    context = config(site_zcml, features=("devmode",), execute=False)
+    from zope.configuration import xmlconfig, config
+
+    # The context will return the domain as an 8-bit character string.
+    if not isinstance(domain, bytes):
+        domain = domain.encode('ascii')
+
+    # Load server-independent site config
+    context = config.ConfigurationMachine()
+    xmlconfig.registerCommonDirectives(context)
+    context.provideFeature("devmode")
+    context = xmlconfig.file(site_zcml, context=context, execute=False)
+
     catalog = context.i18n_strings.get(domain, {})
     res = {}
     duplicated = []

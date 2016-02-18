@@ -23,6 +23,9 @@ def setUp(test):
     zc.buildout.testing.buildoutSetUp(test)
     zc.buildout.testing.install('ZConfig', test)
     zc.buildout.testing.install('ZODB3', test)
+    zc.buildout.testing.install('ZODB', test)
+    zc.buildout.testing.install('ZEO', test)
+    zc.buildout.testing.install('zodbpickle', test)
     zc.buildout.testing.install('pytz', test)
     zc.buildout.testing.install('six', test)
     zc.buildout.testing.install('zc.recipe.egg', test)
@@ -32,15 +35,9 @@ def setUp(test):
     zc.buildout.testing.install('persistent', test)
     zc.buildout.testing.install('BTrees', test)
     zc.buildout.testing.install('zope.annotation', test)
-    zc.buildout.testing.install('zope.app.applicationcontrol', test)
     zc.buildout.testing.install('zope.app.appsetup', test)
     zc.buildout.testing.install('zope.app.locales', test)
     zc.buildout.testing.install('zope.app.publication', test)
-    try:
-        zc.buildout.testing.install('zope.applicationcontrol', test)
-    except AttributeError:
-        # BBB: for running tests with zopetoolkit < 1.0, e.g. Zope 2.12
-        pass
     zc.buildout.testing.install('zope.authentication', test)
     zc.buildout.testing.install('zope.browser', test)
     zc.buildout.testing.install('zope.component', test)
