@@ -35,7 +35,6 @@ def setUp(test):
     zc.buildout.testing.install('persistent', test)
     zc.buildout.testing.install('BTrees', test)
     zc.buildout.testing.install('zope.annotation', test)
-    zc.buildout.testing.install('zope.app.appsetup', test)
     zc.buildout.testing.install('zope.app.locales', test)
     zc.buildout.testing.install('zope.app.publication', test)
     zc.buildout.testing.install('zope.authentication', test)
