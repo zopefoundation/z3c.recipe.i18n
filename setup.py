@@ -63,22 +63,18 @@ setup(
     namespace_packages = ['z3c', 'z3c.recipe'],
     extras_require = dict(
         test = [
-            'zope.testing',
-            'zc.lockfile',
-            'zope.app.publication',
-            'zope.component',
+            'zope.component'
             'zope.configuration',
-            'zope.container',
-            'zope.error',
             'zope.event',
+            'zope.event',
+            'zope.i18nmessageid',
             'zope.interface',
             'zope.location',
-            'zope.processlifetime',
-            'zope.session',
-            'zope.site',
+            'zope.proxy',
+            'zope.schema',
             'zope.security',
-            'zope.traversing',
-            'ZODB3',
+            'zope.tal',
+            'zope.testing',
             ],
         ),
     install_requires = [
@@ -86,7 +82,6 @@ setup(
         'zc.buildout >= 2.0.0',
         'zc.recipe.egg',
         'zope.app.locales[extract] >= 3.5.0',
-        'zope.configuration',
         ],
     entry_points = {
         'zc.buildout': [
