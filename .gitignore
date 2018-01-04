@@ -4,3 +4,7 @@
 bin
 develop-eggs
 eggs
+.mr.developer.cfg
+.tox
+.coverage
+ext-src
