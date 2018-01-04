@@ -8,6 +8,7 @@ python:
     - pypy3
 install:
     - pip install -U pip setuptools
+    - pip install -U --no-binary zc.recipe.egg -e ".[test]"
     - pip install -U zope.testrunner coverage coveralls
     - pip install -U -e .[test]
 script:
