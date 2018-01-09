@@ -58,7 +58,7 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Framework :: Buildout'],
-    url = 'http://pypi.python.org/pypi/z3c.recipe.i18n',
+    url = 'https://github.com/zopefoundation/z3c.recipe.i18n',
     zip_safe = False,
     packages = find_packages('src'),
     include_package_data = True,
