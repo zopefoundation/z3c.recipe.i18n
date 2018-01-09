@@ -112,7 +112,6 @@ class POTMaker(POTMaker):
 
 
 def usage(code, msg=''):
-    # Python 2.1 required
     print(__doc__, file=sys.stderr)
     if msg:
         print(msg, file=sys.stderr)
