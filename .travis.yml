@@ -6,11 +6,13 @@ python:
     - 3.6
     - pypy
     - pypy3
+# See https://github.com/pypa/pip/issues/3028 and
+# https://github.com/zopefoundation/z3c.recipe.sphinxdoc/blob/a5be89162d9d3ee0d71df2cecf2d366f9e939517/setup.py#L61
+# for the reason for `--no-binary=zc.recipe.egg`
 install:
     - pip install -U pip setuptools
-    - pip install -U --no-binary zc.recipe.egg -e ".[test]"
+    - pip install -U --no-binary=zc.recipe.egg -e ".[test]"
     - pip install -U zope.testrunner coverage coveralls
-    - pip install -U -e .[test]
 script:
     - coverage run -m zope.testrunner --test-path=src
 after_success:
