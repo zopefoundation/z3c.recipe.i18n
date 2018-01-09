@@ -118,8 +118,8 @@ def stats(path):
         for domain_file in os.listdir(lc_messages_path):
             if domain_file.endswith('.po'):
                 domain_path = os.path.join(lc_messages_path, domain_file)
-                file = open(domain_path, mode='r')
-                msgs += getMessageDictionary(file)
+                with open(domain_path, mode='r') as f:
+                    msgs += getMessageDictionary(f)
 
         # We are dealing with the default language, which always has just one
         # message string for the meta data (which is not recorded).
