@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.4
+#!/usr/bin/env python
 ##############################################################################
 #
 # Copyright (c) 2008 Zope Foundation and Contributors.
@@ -97,4 +97,3 @@ def main(argv=sys.argv):
 
 if __name__ == '__main__':
     main()
-
