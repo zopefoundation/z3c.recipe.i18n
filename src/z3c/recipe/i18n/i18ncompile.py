@@ -29,10 +29,11 @@ Options:
 
 $Id:$
 """
-import sys
+import getopt
 import os
 import os.path
-import getopt
+import subprocess
+import sys
 
 def usage(code, msg=''):
     """Display help."""
@@ -57,8 +58,7 @@ def msgfmt(path):
                 poPath = str(base + '.po')
                 moPath = str(base + '.mo')
                 print('Compile language "%s" for "%s"' % (language, domain))
-                os.system('msgfmt -o %s %s' %(moPath, poPath))
-
+                subprocess.call(['msgfmt', '-o', moPath, poPath])
 
 def main(argv=sys.argv):
     try:
