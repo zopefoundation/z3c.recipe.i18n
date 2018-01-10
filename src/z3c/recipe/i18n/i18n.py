@@ -94,7 +94,8 @@ class I18nSetup(object):
         if not os.path.exists(partsDir):
             os.mkdir(partsDir)
         zcmlFilename = os.path.join(partsDir, 'configure.zcml')
-        file(zcmlFilename, 'w').write(zcml)
+        with open(zcmlFilename, 'w') as zcmlFile:
+            zcmlFile.write(zcml)
 
         # Generate i18nextract
         arguments = ['%sextract'% self.name,

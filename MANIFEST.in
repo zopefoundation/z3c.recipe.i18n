@@ -1,1 +1,7 @@
-recursive-include src/z3c/recipe/i18n *.txt
+include *.txt
+include *.rst
+include bootstrap.py
+include buildout.cfg
+include tox.ini
+include .travis.yml
+recursive-include src *.txt *.zcml *.pt

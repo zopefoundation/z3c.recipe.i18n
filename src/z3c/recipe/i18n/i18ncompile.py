@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.4
+#!/usr/bin/env python
 ##############################################################################
 #
 # Copyright (c) 2008 Zope Foundation and Contributors.
@@ -12,6 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from __future__ import print_function
 """Compile PO files to Mo files for all languages in a given locales dir
 
 This utility requires the GNU gettext package to be installed. The command
@@ -28,16 +29,17 @@ Options:
 
 $Id:$
 """
-import sys
+import getopt
 import os
 import os.path
-import getopt
+import subprocess
+import sys
 
 def usage(code, msg=''):
     """Display help."""
-    print >> sys.stderr, '\n'.join(__doc__.split('\n')[:-2])
+    print('\n'.join(__doc__.split('\n')[:-2]), file=sys.stderr)
     if msg:
-        print >> sys.stderr, '** Error: ' + str(msg) + ' **'
+        print('** Error: ' + str(msg) + ' **', file=sys.stderr)
     sys.exit(code)
 
 
@@ -55,9 +57,8 @@ def msgfmt(path):
                 base = os.path.join(lc_messages_path, domain)
                 poPath = str(base + '.po')
                 moPath = str(base + '.mo')
-                print 'Compile language "%s" for "%s"' % (language, domain)
-                os.system('msgfmt -o %s %s' %(moPath, poPath))
-
+                print('Compile language "%s" for "%s"' % (language, domain))
+                subprocess.call(['msgfmt', '-o', moPath, poPath])
 
 def main(argv=sys.argv):
     try:
@@ -65,7 +66,7 @@ def main(argv=sys.argv):
             argv[1:],
             'l:h',
             ['help', 'locals-dir='])
-    except getopt.error, msg:
+    except getopt.error as msg:
         usage(1, msg)
 
     path = None
@@ -75,7 +76,7 @@ def main(argv=sys.argv):
         elif opt in ('-l', '--locales-dir'):
             cwd = os.getcwd()
             # This is for symlinks. Thanks to Fred for this trick.
-            if os.environ.has_key('PWD'):
+            if 'PWD' in os.environ:
                 cwd = os.environ['PWD']
             path = os.path.normpath(os.path.join(cwd, arg))
 
@@ -85,4 +86,3 @@ def main(argv=sys.argv):
 
 if __name__ == '__main__':
     main()
-

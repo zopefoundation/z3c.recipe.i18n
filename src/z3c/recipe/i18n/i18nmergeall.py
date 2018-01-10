@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.4
+#!/usr/bin/env python
 ##############################################################################
 #
 # Copyright (c) 2008 Zope Foundation and Contributors.
@@ -12,6 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from __future__ import print_function
 """Merge a POT file with all languages
 
 This utility requires the GNU gettext package to be installed. The command
@@ -35,9 +36,9 @@ import getopt
 
 def usage(code, msg=''):
     """Display help."""
-    print >> sys.stderr, '\n'.join(__doc__.split('\n')[:-2])
+    print('\n'.join(__doc__.split('\n')[:-2]), file=sys.stderr)
     if msg:
-        print >> sys.stderr, '** Error: ' + str(msg) + ' **'
+        print('** Error: ' + str(msg) + ' **', file=sys.stderr)
     sys.exit(code)
 
 
@@ -62,7 +63,7 @@ def merge(path):
             poFile.write(open(potPath, 'rb').read())
             poFile.close()
 
-        print 'Merging language "%s", domain "%s"' %(language, domain)
+        print('Merging language "%s", domain "%s"' %(language, domain))
         rc = subprocess.call(['msgmerge', '-U', poPath, potPath])
         if rc != 0:
             failed.append(language)
@@ -76,7 +77,7 @@ def main(argv=sys.argv):
             argv[1:],
             'l:h',
             ['help', 'locals-dir='])
-    except getopt.error, msg:
+    except getopt.error as msg:
         usage(1, msg)
 
     path = None
@@ -86,7 +87,7 @@ def main(argv=sys.argv):
         elif opt in ('-l', '--locales-dir'):
             cwd = os.getcwd()
             # This is for symlinks. Thanks to Fred for this trick.
-            if os.environ.has_key('PWD'):
+            if 'PWD' in os.environ:
                 cwd = os.environ['PWD']
             path = os.path.normpath(os.path.join(cwd, arg))
 
@@ -96,4 +97,3 @@ def main(argv=sys.argv):
 
 if __name__ == '__main__':
     main()
-

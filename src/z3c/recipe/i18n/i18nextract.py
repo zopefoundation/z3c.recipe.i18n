@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.4
+#!/usr/bin/env python
 ##############################################################################
 #
 # Copyright (c) 2008 Zope Foundation and Contributors.
@@ -12,6 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from __future__ import print_function
 """Program to extract internationalization markup from Python Code,
 Page Templates and ZCML located in egg packages.
 
@@ -70,6 +71,7 @@ from zope.app.locales.extract import pot_header as _DEFAULT_POT_HEADER
 from zope.app.locales.extract import POTMaker
 from zope.app.locales.extract import py_strings
 from zope.app.locales.extract import tal_strings
+from zope.app.locales.extract import zcml_strings
 from zope.configuration.name import resolve
 
 
@@ -100,8 +102,7 @@ class POTMaker(POTMaker):
                                  'encoding': DEFAULT_ENCODING})
 
         # Sort the catalog entries by filename
-        catalog = self.catalog.values()
-        catalog.sort()
+        catalog = sorted(self.catalog.values())
 
         # Write each entry to the file
         for entry in catalog:
@@ -111,13 +112,14 @@ class POTMaker(POTMaker):
 
 
 def usage(code, msg=''):
-    # Python 2.1 required
-    print >> sys.stderr, __doc__
+    print(__doc__, file=sys.stderr)
     if msg:
-        print >> sys.stderr, msg
+        print(msg, file=sys.stderr)
     sys.exit(code)
 
 
+# This is copied from zope.app.locales Py3 branch, and can be imported from
+# there once it's merged and released.
 def zcml_strings(path, domain="zope", site_zcml=None):
     """Retrieve all ZCML messages from `dir` that are in the `domain`.
 
@@ -127,8 +129,18 @@ def zcml_strings(path, domain="zope", site_zcml=None):
     to collect the same message more then one time since we use the same zcml
     configuration for each package path.
     """
-    from zope.app.appsetup import config
-    context = config(site_zcml, features=("devmode",), execute=False)
+    from zope.configuration import xmlconfig, config
+
+    # The context will return the domain as an 8-bit character string.
+    if not isinstance(domain, bytes):
+        domain = domain.encode('ascii')
+
+    # Load server-independent site config
+    context = config.ConfigurationMachine()
+    xmlconfig.registerCommonDirectives(context)
+    context.provideFeature("devmode")
+    context = xmlconfig.file(site_zcml, context=context, execute=False)
+
     catalog = context.i18n_strings.get(domain, {})
     res = {}
     duplicated = []
@@ -154,7 +166,7 @@ def main(argv=sys.argv):
             'hed:s:i:m:p:o:x:t:',
             ['help', 'domain=', 'site_zcml=', 'path=', 'python-only',
              'verify-domain', 'exclude-default-domain'])
-    except getopt.error, msg:
+    except getopt.error as msg:
         usage(1, msg)
 
     domain = 'z3c'
@@ -204,7 +216,7 @@ def main(argv=sys.argv):
             os.mkdir(output_dir)
         output_file = os.path.join(output_dir, output_file)
 
-    print "domain:                 %r\n" \
+    print("domain:                 %r\n" \
           "configuration:          %s\n" \
           "exclude dirs:           %r\n" \
           "include default domain: %r\n" \
@@ -212,7 +224,7 @@ def main(argv=sys.argv):
           "verify domain:          %r\n" \
           "header template:        %r\n" \
           % (domain, site_zcml, exclude_dirs, include_default_domain,
-             python_only, verify_domain, header_template)
+             python_only, verify_domain, header_template))
 
     # setup pot maker
     maker = POTMaker(output_file, '', header_template)
@@ -227,10 +239,10 @@ def main(argv=sys.argv):
             basePath = basePath[:mIdx]
         pkgPath = path[len(basePath):]
 
-        print "package: %r\n" \
+        print("package: %r\n" \
               "base:    %r\n" \
               "path:    %r\n" \
-              % (pkgPath, basePath, path)
+              % (pkgPath, basePath, path))
 
         maker.add(py_strings(path, domain, exclude=exclude_dirs,
                              verify_domain=verify_domain),
@@ -255,7 +267,7 @@ def main(argv=sys.argv):
                 maker.add(maker_func(path, basePath, exclude_dirs), basePath)
 
     maker.write()
-    print "output: %r\n" % output_file
+    print("output: %r\n" % output_file)
 
 
 if __name__ == '__main__':
