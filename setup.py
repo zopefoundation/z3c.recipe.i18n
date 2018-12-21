@@ -28,15 +28,15 @@ setup(
     author_email="zope-dev@zope.org",
     description="Zope3 egg based i18n locales extration recipes",
     long_description=(
-        read("README.txt")
+        read("README.rst")
         + "\n\n"
-        + read("CHANGES.txt")
+        + read("CHANGES.rst")
         + "\n\n"
         + "**********************\n"
         "Detailed Documentation\n"
         "**********************"
         + "\n\n"
-        + read("src", "z3c", "recipe", "i18n", "README.txt")
+        + read("src", "z3c", "recipe", "i18n", "README.rst")
     ),
     license="ZPL 2.1",
     keywords="zope3 z3c i18n locales extraction recipe",

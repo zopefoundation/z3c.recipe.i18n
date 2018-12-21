@@ -65,7 +65,7 @@ checker = renormalizing.RENormalizing(
 def test_suite():
     return unittest.TestSuite(
         doctest.DocFileSuite(
-            "README.txt",
+            "README.rst",
             setUp=setUp,
             tearDown=zc.buildout.testing.buildoutTearDown,
             optionflags=doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS,
