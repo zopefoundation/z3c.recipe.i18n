@@ -5,7 +5,7 @@ CHANGES
 1.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Require `zope.app.locales >= 4.0` to get red of code copied from there.
 
 
 1.0.0 (2018-01-10)

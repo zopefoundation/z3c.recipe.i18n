@@ -85,7 +85,7 @@ setup(
         "setuptools",
         "zc.buildout >= 2.0.0",
         "zc.recipe.egg",
-        "zope.app.locales[extract] >= 3.5.0",
+        "zope.app.locales[extract] >= 4.0",
     ],
     entry_points={"zc.buildout": ["i18n = z3c.recipe.i18n.i18n:I18nSetup"]},
     test_suite="z3c.recipe.i18n",
