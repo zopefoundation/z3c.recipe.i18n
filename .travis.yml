@@ -8,6 +8,8 @@ python:
     - pypy3
 matrix:
     include:
+        - python: 3.7
+          dist: xenial
         - python: 3.6
           name: "Flake8"
           install:  pip install -U flake8
