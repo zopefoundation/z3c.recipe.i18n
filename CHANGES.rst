@@ -2,8 +2,8 @@
 CHANGES
 =======
 
-1.0.1 (unreleased)
-------------------
+1.1 (unreleased)
+----------------
 
 - Require `zope.app.locales >= 4.0` to get red of code copied from there.
 
