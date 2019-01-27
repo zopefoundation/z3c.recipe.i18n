@@ -1,0 +1,15 @@
+[run]
+branch = true
+source = z3c.recipe.i18n
+parallel = true
+data_file = $COVERAGE_HOME/.coverage
+
+
+[report]
+precision = 2
+exclude_lines =
+    pragma: no cover
+    if __name__ == "__main__":
+    raise NotImplementedError
+    self.fail
+    raise AssertionError

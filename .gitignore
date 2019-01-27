@@ -1,10 +1,11 @@
 *.egg-info
 *.pyc
+.coverage
 .installed.cfg
+.mr.developer.cfg
+.tox
 bin
 develop-eggs
 eggs
-.mr.developer.cfg
-.tox
-.coverage
 ext-src
+htmlcov/

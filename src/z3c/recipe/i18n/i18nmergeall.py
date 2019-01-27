@@ -13,6 +13,7 @@
 #
 ##############################################################################
 from __future__ import print_function
+
 """Merge a POT file with all languages
 
 This utility requires the GNU gettext package to be installed. The command
@@ -27,73 +28,71 @@ Options:
     -l / --locales-dir
         Specify the 'locales' directory for which to generate the statistics.
 
-$Id:$
 """
+import shutil
 import sys
 import os
 import subprocess
 import getopt
 
-def usage(code, msg=''):
+
+def usage(code, msg=""):
     """Display help."""
-    print('\n'.join(__doc__.split('\n')[:-2]), file=sys.stderr)
+    print("\n".join(__doc__.split("\n")[:-2]), file=sys.stderr)
     if msg:
-        print('** Error: ' + str(msg) + ' **', file=sys.stderr)
+        print("** Error: " + str(msg) + " **", file=sys.stderr)
     sys.exit(code)
 
 
 def merge(path):
     for pot_name in os.listdir(path):
-        if pot_name.endswith('.pot'):
+        if pot_name.endswith(".pot"):
             break
     domain = pot_name[:-4]
-    potPath = os.path.join(path, domain+'.pot')
+    potPath = os.path.join(path, domain + ".pot")
 
     failed = []
     for language in sorted(os.listdir(path)):
-        lc_messages_path = os.path.join(path, language, 'LC_MESSAGES')
+        lc_messages_path = os.path.join(path, language, "LC_MESSAGES")
 
         # Make sure we got a language directory
         if not os.path.isdir(lc_messages_path):
             continue
 
-        poPath = os.path.join(lc_messages_path, domain+'.po')
+        poPath = os.path.join(lc_messages_path, domain + ".po")
         if not os.path.exists(poPath):
-            poFile = open(poPath, 'wb')
-            poFile.write(open(potPath, 'rb').read())
-            poFile.close()
+            shutil.copyfile(potPath, poPath)
 
-        print('Merging language "%s", domain "%s"' %(language, domain))
-        rc = subprocess.call(['msgmerge', '-U', poPath, potPath])
+        print('Merging language "%s", domain "%s"' % (language, domain))
+        rc = subprocess.call(["msgmerge", "-U", poPath, potPath])
         if rc != 0:
             failed.append(language)
 
     if failed:
-        sys.exit('msgmerge failed for %s' % ', '.join(failed))
+        sys.exit("msgmerge failed for %s" % ", ".join(failed))
+
 
 def main(argv=sys.argv):
     try:
-        opts, args = getopt.getopt(
-            argv[1:],
-            'l:h',
-            ['help', 'locals-dir='])
+        opts, args = getopt.getopt(argv[1:], "l:h", ["help", "locals-dir="])
     except getopt.error as msg:
         usage(1, msg)
 
     path = None
     for opt, arg in opts:
-        if opt in ('-h', '--help'):
+        if opt in ("-h", "--help"):
             usage(0)
-        elif opt in ('-l', '--locales-dir'):
+        elif opt in ("-l", "--locales-dir"):
             cwd = os.getcwd()
             # This is for symlinks. Thanks to Fred for this trick.
-            if 'PWD' in os.environ:
-                cwd = os.environ['PWD']
+            if "PWD" in os.environ:
+                cwd = os.environ["PWD"]
             path = os.path.normpath(os.path.join(cwd, arg))
 
     if path is None:
-        usage(1, 'You must specify the path to the locales directory.')
+        usage(1, "You must specify the path to the locales directory.")
     merge(path)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

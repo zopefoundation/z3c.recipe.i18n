@@ -2,10 +2,12 @@
 CHANGES
 =======
 
-1.0.1 (unreleased)
-------------------
+1.1 (unreleased)
+----------------
 
-- Nothing changed yet.
+- Require zope.app.locales >= 4.0 to get rid of code copied from there.
+
+- Add support for Python 3.7.
 
 
 1.0.0 (2018-01-10)

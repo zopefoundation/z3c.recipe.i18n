@@ -135,7 +135,7 @@ Now, Let's run the buildout and see what we get:
   Generated script '/sample-buildout/bin/i18nextract'.
   Generated script '/sample-buildout/bin/i18nmergeall'.
   Generated script '/sample-buildout/bin/i18nstats'.
-  Generated script '/sample-buildout/bin/i18ncompile'.
+  Generated script '/sample-buildout/bin/i18ncompile'...
 
 After running buildout, the bin folder contains the different i18n script:
 

@@ -13,6 +13,7 @@
 #
 ##############################################################################
 from __future__ import print_function
+
 """Program to extract internationalization markup from Python Code,
 Page Templates and ZCML located in egg packages.
 
@@ -55,14 +56,15 @@ Options:
     --python-only
         Only extract message ids from Python
     --verify-domain
-        Only retrieve the messages of the specified domains in the python files.
+        Only retrieve the messages of the specified domains in the python
+        files.
     -t <path>
         Specifies the file path of the header template.
-
-$Id$
 """
 
-import os, sys, getopt
+import getopt
+import os
+import sys
 import time
 
 from zope.app.locales.extract import DEFAULT_CHARSET
@@ -79,15 +81,12 @@ class POTMaker(POTMaker):
     """This class inserts sets of strings into a POT file.
     """
 
-    def __init__ (self, output_fn, path, header_template=None):
+    def __init__(self, output_fn, path, header_template=None):
         self._output_filename = output_fn
         self.path = path
         if header_template is not None and os.path.exists(header_template):
-            file = open(header_template, 'r')
-            try:
+            with open(header_template, "r") as file:
                 self._pot_header = file.read()
-            finally:
-                file.close()
         else:
             self._pot_header = _DEFAULT_POT_HEADER
         self.catalog = {}
@@ -95,81 +94,51 @@ class POTMaker(POTMaker):
     def write(self):
         pot_header = self._pot_header
 
-        file = open(self._output_filename, 'w')
-        file.write(pot_header % {'time':     time.ctime(),
-                                 'version':  self._getProductVersion(),
-                                 'charset':  DEFAULT_CHARSET,
-                                 'encoding': DEFAULT_ENCODING})
+        with open(self._output_filename, "w") as file:
+            file.write(
+                pot_header
+                % {
+                    "time": time.ctime(),
+                    "version": self._getProductVersion(),
+                    "charset": DEFAULT_CHARSET,
+                    "encoding": DEFAULT_ENCODING,
+                }
+            )
 
-        # Sort the catalog entries by filename
-        catalog = sorted(self.catalog.values())
+            # Sort the catalog entries by filename
+            catalog = sorted(self.catalog.values())
 
-        # Write each entry to the file
-        for entry in catalog:
-            entry.write(file)
-
-        file.close()
+            # Write each entry to the file
+            for entry in catalog:
+                entry.write(file)
 
 
-def usage(code, msg=''):
+def usage(code, msg=""):
     print(__doc__, file=sys.stderr)
     if msg:
         print(msg, file=sys.stderr)
     sys.exit(code)
 
 
-# This is copied from zope.app.locales Py3 branch, and can be imported from
-# there once it's merged and released.
-def zcml_strings(path, domain="zope", site_zcml=None):
-    """Retrieve all ZCML messages from `dir` that are in the `domain`.
-
-    Note, the pot maker runs in a loop for each package and the maker collects
-    only the given messages from such a package by the given path. This allows
-    us to collect messages from eggs and external packages. This also prevents
-    to collect the same message more then one time since we use the same zcml
-    configuration for each package path.
-    """
-    from zope.configuration import xmlconfig, config
-
-    # The context will return the domain as an 8-bit character string.
-    if not isinstance(domain, bytes):
-        domain = domain.encode('ascii')
-
-    # Load server-independent site config
-    context = config.ConfigurationMachine()
-    xmlconfig.registerCommonDirectives(context)
-    context.provideFeature("devmode")
-    context = xmlconfig.file(site_zcml, context=context, execute=False)
-
-    catalog = context.i18n_strings.get(domain, {})
-    res = {}
-    duplicated = []
-    append = duplicated.append
-    for msg, locations  in catalog.items():
-        for filename, lineno in locations:
-            # only collect locations based on the given path
-            if filename.startswith(path):
-                id = '%s-%s-%s' % (msg, filename, lineno)
-                # skip duplicated entries
-                if id not in duplicated:
-                    append(id)
-                    l = res.get(msg, [])
-                    l.append((filename, lineno))
-                    res[msg] = l
-    return res
-
-
 def main(argv=sys.argv):
     try:
         opts, args = getopt.getopt(
             argv[1:],
-            'hed:s:i:m:p:o:x:t:',
-            ['help', 'domain=', 'site_zcml=', 'path=', 'python-only',
-             'verify-domain', 'exclude-default-domain'])
+            "hed:s:i:m:p:o:x:t:",
+            [
+                "help",
+                "domain=",
+                "site_zcml=",
+                "path=",
+                "python-only",
+                "verify-domain",
+                "exclude-default-domain",
+            ],
+        )
     except getopt.error as msg:
         usage(1, msg)
 
-    domain = 'z3c'
+    domain = "z3c"
     include_default_domain = True
     output_dir = None
     exclude_dirs = []
@@ -180,77 +149,94 @@ def main(argv=sys.argv):
     eggPaths = []
     header_template = None
     for opt, arg in opts:
-        if opt in ('-h', '--help'):
+        if opt in ("-h", "--help"):
             usage(0)
-        elif opt in ('-d', '--domain'):
+        elif opt in ("-d", "--domain"):
             domain = arg
-        elif opt in ('-s', '--site_zcml'):
+        elif opt in ("-s", "--site_zcml"):
             site_zcml = arg
-        elif opt in ('-e', '--exclude-default-domain'):
+        elif opt in ("-e", "--exclude-default-domain"):
             include_default_domain = False
-        elif opt in ('-m', ):
+        elif opt in ("-m",):
             makers.append(resolve(arg))
-        elif opt in ('-o', ):
+        elif opt in ("-o",):
             output_dir = arg
-        elif opt in ('-x', ):
+        elif opt in ("-x",):
             exclude_dirs.append(arg)
-        elif opt in ('--python-only',):
+        elif opt in ("--python-only",):
             python_only = True
-        elif opt in ('--verify-domain'):
+        elif opt in ("--verify-domain"):
             verify_domain = True
-        elif opt in ('-p', '--package'):
+        elif opt in ("-p", "--package"):
             package = resolve(arg)
             path = os.path.dirname(package.__file__)
             if not os.path.exists(path):
-                usage(1, 'The specified path does not exist.')
+                usage(1, "The specified path does not exist.")
             eggPaths.append((arg, path))
-        elif opt in ('-t', ):
+        elif opt in ("-t",):
             if not os.path.exists(arg):
-                usage(1, 'The specified header template does not exist.')
+                usage(1, "The specified header template does not exist.")
             header_template = arg
 
     # setup output file
-    output_file = domain+'.pot'
+    output_file = domain + ".pot"
     if output_dir:
         if not os.path.exists(output_dir):
             os.mkdir(output_dir)
         output_file = os.path.join(output_dir, output_file)
 
-    print("domain:                 %r\n" \
-          "configuration:          %s\n" \
-          "exclude dirs:           %r\n" \
-          "include default domain: %r\n" \
-          "python only:            %r\n" \
-          "verify domain:          %r\n" \
-          "header template:        %r\n" \
-          % (domain, site_zcml, exclude_dirs, include_default_domain,
-             python_only, verify_domain, header_template))
+    print(
+        "domain:                 %r\n"
+        "configuration:          %s\n"
+        "exclude dirs:           %r\n"
+        "include default domain: %r\n"
+        "python only:            %r\n"
+        "verify domain:          %r\n"
+        "header template:        %r\n"
+        % (
+            domain,
+            site_zcml,
+            exclude_dirs,
+            include_default_domain,
+            python_only,
+            verify_domain,
+            header_template,
+        )
+    )
 
     # setup pot maker
-    maker = POTMaker(output_file, '', header_template)
+    maker = POTMaker(output_file, "", header_template)
 
     # add maker for each given path
     for pkgName, path in eggPaths:
         basePath = path
-        moduleNames = pkgName.split('.')
+        moduleNames = pkgName.split(".")
         moduleNames.reverse()
         for mName in moduleNames:
             mIdx = path.rfind(mName)
             basePath = basePath[:mIdx]
         pkgPath = path[len(basePath):]
 
-        print("package: %r\n" \
-              "base:    %r\n" \
-              "path:    %r\n" \
-              % (pkgPath, basePath, path))
+        print(
+            "package: %r\n"
+            "base:    %r\n"
+            "path:    %r\n" % (pkgPath, basePath, path)
+        )
 
-        maker.add(py_strings(path, domain, exclude=exclude_dirs,
-                             verify_domain=verify_domain),
-                  basePath)
+        maker.add(
+            py_strings(
+                path, domain, exclude=exclude_dirs, verify_domain=verify_domain
+            ),
+            basePath,
+        )
         if not python_only:
             maker.add(zcml_strings(path, domain, site_zcml), basePath)
-            maker.add(tal_strings(path, domain, include_default_domain,
-                                  exclude=exclude_dirs), basePath)
+            maker.add(
+                tal_strings(
+                    path, domain, include_default_domain, exclude=exclude_dirs
+                ),
+                basePath,
+            )
         for maker_func in makers:
             try:
                 maker.add(
@@ -261,7 +247,9 @@ def main(argv=sys.argv):
                         domain=domain,
                         include_default_domain=include_default_domain,
                         site_zcml=site_zcml,
-                        ), basePath)
+                    ),
+                    basePath,
+                )
             except TypeError:
                 # BBB: old arguments
                 maker.add(maker_func(path, basePath, exclude_dirs), basePath)
@@ -270,5 +258,5 @@ def main(argv=sys.argv):
     print("output: %r\n" % output_file)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
