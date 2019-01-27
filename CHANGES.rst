@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-1.1 (unreleased)
+1.1 (2019-01-27)
 ----------------
 
 - Require zope.app.locales >= 4.0 to get rid of code copied from there.
