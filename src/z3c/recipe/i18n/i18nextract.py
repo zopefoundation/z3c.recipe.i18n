@@ -85,11 +85,8 @@ class POTMaker(POTMaker):
         self._output_filename = output_fn
         self.path = path
         if header_template is not None and os.path.exists(header_template):
-            file = open(header_template, "r")
-            try:
+            with open(header_template, "r") as file:
                 self._pot_header = file.read()
-            finally:
-                file.close()
         else:
             self._pot_header = _DEFAULT_POT_HEADER
         self.catalog = {}
@@ -97,25 +94,23 @@ class POTMaker(POTMaker):
     def write(self):
         pot_header = self._pot_header
 
-        file = open(self._output_filename, "w")
-        file.write(
-            pot_header
-            % {
-                "time": time.ctime(),
-                "version": self._getProductVersion(),
-                "charset": DEFAULT_CHARSET,
-                "encoding": DEFAULT_ENCODING,
-            }
-        )
+        with open(self._output_filename, "w") as file:
+            file.write(
+                pot_header
+                % {
+                    "time": time.ctime(),
+                    "version": self._getProductVersion(),
+                    "charset": DEFAULT_CHARSET,
+                    "encoding": DEFAULT_ENCODING,
+                }
+            )
 
-        # Sort the catalog entries by filename
-        catalog = sorted(self.catalog.values())
+            # Sort the catalog entries by filename
+            catalog = sorted(self.catalog.values())
 
-        # Write each entry to the file
-        for entry in catalog:
-            entry.write(file)
-
-        file.close()
+            # Write each entry to the file
+            for entry in catalog:
+                entry.write(file)
 
 
 def usage(code, msg=""):

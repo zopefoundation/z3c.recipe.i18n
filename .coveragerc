@@ -1,6 +1,6 @@
 [run]
 branch = true
-source = $COVERAGE_HOME/src/z3c/recipe/i18n
+source = z3c.recipe.i18n
 parallel = true
 data_file = $COVERAGE_HOME/.coverage
 

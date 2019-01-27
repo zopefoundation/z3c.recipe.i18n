@@ -97,12 +97,9 @@ class I18nSetup(object):
         # Generate i18nextract
         arguments = [
             "%sextract" % self.name,
-            "-d",
-            domain,
-            "-s",
-            zcmlFilename,
-            "-o",
-            output,
+            "-d", domain,
+            "-s", zcmlFilename,
+            "-o", output,
         ]
 
         if excludeDefaultDomain:

@@ -28,8 +28,8 @@ Options:
     -l / --locales-dir
         Specify the 'locales' directory for which to generate the statistics.
 
-$Id:$
 """
+import shutil
 import sys
 import os
 import subprocess
@@ -61,9 +61,7 @@ def merge(path):
 
         poPath = os.path.join(lc_messages_path, domain + ".po")
         if not os.path.exists(poPath):
-            poFile = open(poPath, "wb")
-            poFile.write(open(potPath, "rb").read())
-            poFile.close()
+            shutil.copyfile(potPath, poPath)
 
         print('Merging language "%s", domain "%s"' % (language, domain))
         rc = subprocess.call(["msgmerge", "-U", poPath, potPath])

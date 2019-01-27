@@ -5,7 +5,7 @@ CHANGES
 1.1 (unreleased)
 ----------------
 
-- Require `zope.app.locales >= 4.0` to get red of code copied from there.
+- Require zope.app.locales >= 4.0 to get rid of code copied from there.
 
 - Add support for Python 3.7.
 
