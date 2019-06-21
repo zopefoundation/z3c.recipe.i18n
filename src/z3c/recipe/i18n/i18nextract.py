@@ -65,52 +65,12 @@ Options:
 import getopt
 import os
 import sys
-import time
 
-from zope.app.locales.extract import DEFAULT_CHARSET
-from zope.app.locales.extract import DEFAULT_ENCODING
-from zope.app.locales.extract import pot_header as _DEFAULT_POT_HEADER
 from zope.app.locales.extract import POTMaker
 from zope.app.locales.extract import py_strings
 from zope.app.locales.extract import tal_strings
 from zope.app.locales.extract import zcml_strings
 from zope.configuration.name import resolve
-
-
-class POTMaker(POTMaker):
-    """This class inserts sets of strings into a POT file.
-    """
-
-    def __init__(self, output_fn, path, header_template=None):
-        self._output_filename = output_fn
-        self.path = path
-        if header_template is not None and os.path.exists(header_template):
-            with open(header_template, "r") as file:
-                self._pot_header = file.read()
-        else:
-            self._pot_header = _DEFAULT_POT_HEADER
-        self.catalog = {}
-
-    def write(self):
-        pot_header = self._pot_header
-
-        with open(self._output_filename, "w") as file:
-            file.write(
-                pot_header
-                % {
-                    "time": time.ctime(),
-                    "version": self._getProductVersion(),
-                    "charset": DEFAULT_CHARSET,
-                    "encoding": DEFAULT_ENCODING,
-                }
-            )
-
-            # Sort the catalog entries by filename
-            catalog = sorted(self.catalog.values())
-
-            # Write each entry to the file
-            for entry in catalog:
-                entry.write(file)
 
 
 def usage(code, msg=""):
