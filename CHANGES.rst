@@ -5,7 +5,8 @@ CHANGES
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix extraction on Python 3 by requiring a more recent version of
+  `zope.app.locales`.
 
 
 1.1 (2019-01-27)
