@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-1.2 (unreleased)
+1.2 (2019-06-25)
 ----------------
 
 - Fix extraction on Python 3 by requiring a more recent version of
