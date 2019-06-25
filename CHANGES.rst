@@ -8,6 +8,10 @@ CHANGES
 - Fix extraction on Python 3 by requiring a more recent version of
   `zope.app.locales`.
 
+- Add support for Python 3.8.
+
+- Drop support for Python 3.4.
+
 
 1.1 (2019-01-27)
 ----------------
