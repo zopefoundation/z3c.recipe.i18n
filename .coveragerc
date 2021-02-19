@@ -1,15 +1,28 @@
+# Generated from:
+# https://github.com/zopefoundation/meta/tree/master/config/buildout-recipe
 [run]
-branch = true
 source = z3c.recipe.i18n
+plugins = coverage_python_version
+branch = true
 parallel = true
-data_file = $COVERAGE_HOME/.coverage
 
+[paths]
+source =
+    src/
+    .tox/*/lib/python*/site-packages/
+    .tox/pypy*/site-packages/
 
 [report]
 precision = 2
 exclude_lines =
+    except ImportError:
+    if __name__ == '__main__':
     pragma: no cover
-    if __name__ == "__main__":
-    raise NotImplementedError
-    self.fail
+    pragma: nocover
     raise AssertionError
+    raise NotImplementedError
+    raise unittest.Skip
+    self.fail\(
+
+[html]
+directory = parts/htmlcov

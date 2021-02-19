@@ -1,8 +1,13 @@
-include *.txt
+# Generated from:
+# https://github.com/zopefoundation/meta/tree/master/config/buildout-recipe
 include *.rst
-include bootstrap.py
+include *.txt
 include buildout.cfg
 include tox.ini
-include .travis.yml
 include .coveragerc
-recursive-include src *.rst *.zcml *.pt
+
+recursive-include src *.pt
+recursive-include src *.py
+recursive-include src *.rst
+recursive-include src *.txt
+recursive-include src *.zcml
