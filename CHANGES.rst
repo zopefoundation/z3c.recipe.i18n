@@ -5,7 +5,7 @@ CHANGES
 1.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add support for Python 3.9.
 
 
 1.2 (2019-06-25)
