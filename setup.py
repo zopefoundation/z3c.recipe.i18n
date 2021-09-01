@@ -81,6 +81,7 @@ setup(
             "zope.security",
             "zope.tal",
             "zope.testing",
+            "zope.testrunner",
         ]
     ),
     install_requires=[
