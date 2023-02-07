@@ -14,6 +14,7 @@
 ##############################################################################
 from __future__ import print_function
 
+
 """Merge a POT file with all languages
 
 This utility requires the GNU gettext package to be installed. The command
@@ -29,11 +30,11 @@ Options:
         Specify the 'locales' directory for which to generate the statistics.
 
 """
-import shutil
-import sys
-import os
-import subprocess
 import getopt
+import os
+import shutil
+import subprocess
+import sys
 
 
 def usage(code, msg=""):

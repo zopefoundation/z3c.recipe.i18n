@@ -14,6 +14,7 @@
 ##############################################################################
 from __future__ import print_function
 
+
 """Program to extract internationalization markup from Python Code,
 Page Templates and ZCML located in egg packages.
 

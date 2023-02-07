@@ -14,6 +14,7 @@
 ##############################################################################
 from __future__ import print_function
 
+
 """Translation Statistics Utility
 
 Utility to determine the status of the translations.
@@ -29,9 +30,10 @@ Options:
 
 $Id:$
 """
-import sys
-import os
 import getopt
+import os
+import sys
+
 
 SEARCHING = 0
 COMMENT = 1

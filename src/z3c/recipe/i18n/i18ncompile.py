@@ -14,6 +14,7 @@
 ##############################################################################
 from __future__ import print_function
 
+
 """Compile PO files to Mo files for all languages in a given locales dir
 
 This utility requires the GNU gettext package to be installed. The command
