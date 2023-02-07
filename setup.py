@@ -27,8 +27,8 @@ setup(
     name="z3c.recipe.i18n",
     version="2.0.dev0",
     author="Roger Ineichen and the Zope Community",
-    author_email="zope-dev@zope.org",
-    description="Zope3 egg based i18n locales extration recipes",
+    author_email="zope-dev@zope.dev",
+    description="Zope3 egg based i18n locales extraction recipes",
     long_description=(
         read("README.rst")
         + "\n\n"
@@ -68,6 +68,7 @@ setup(
     include_package_data=True,
     package_dir={"": "src"},
     namespace_packages=["z3c", "z3c.recipe"],
+    python_requires='>=3.7',
     extras_require=dict(
         test=[
             "zope.component",

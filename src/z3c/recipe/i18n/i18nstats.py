@@ -12,7 +12,6 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-from __future__ import print_function
 
 
 """Translation Statistics Utility
@@ -129,7 +128,7 @@ def stats(path):
         for domain_file in os.listdir(lc_messages_path):
             if domain_file.endswith(".po"):
                 domain_path = os.path.join(lc_messages_path, domain_file)
-                with open(domain_path, mode="r") as f:
+                with open(domain_path) as f:
                     msgs += getMessageDictionary(f)
 
         # We are dealing with the default language, which always has just one

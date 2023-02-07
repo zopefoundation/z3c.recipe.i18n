@@ -12,7 +12,6 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-from __future__ import print_function
 
 
 """Merge a POT file with all languages
@@ -64,7 +63,7 @@ def merge(path):
         if not os.path.exists(poPath):
             shutil.copyfile(potPath, poPath)
 
-        print('Merging language "%s", domain "%s"' % (language, domain))
+        print('Merging language "{}", domain "{}"'.format(language, domain))
         rc = subprocess.call(["msgmerge", "-U", poPath, potPath])
         if rc != 0:
             failed.append(language)

@@ -12,7 +12,6 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-from __future__ import print_function
 
 
 """Compile PO files to Mo files for all languages in a given locales dir
@@ -60,7 +59,7 @@ def msgfmt(path):
                 base = os.path.join(lc_messages_path, domain)
                 poPath = str(base + ".po")
                 moPath = str(base + ".mo")
-                print('Compile language "%s" for "%s"' % (language, domain))
+                print(f'Compile language {language!r} for {domain!r}')
                 subprocess.call(["msgfmt", "-o", moPath, poPath])
 
 

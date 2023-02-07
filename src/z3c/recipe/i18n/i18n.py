@@ -47,7 +47,7 @@ env_template = """os.environ['%s'] = %r
 """
 
 
-class I18nSetup(object):
+class I18nSetup:
     def __init__(self, buildout, name, options):
         self.buildout = buildout
         self.name = name
