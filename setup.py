@@ -13,7 +13,9 @@
 ##############################################################################
 
 import os
-from setuptools import setup, find_packages
+
+from setuptools import find_packages
+from setuptools import setup
 
 
 def read(*rnames):
@@ -23,10 +25,10 @@ def read(*rnames):
 
 setup(
     name="z3c.recipe.i18n",
-    version="1.3.dev0",
+    version="2.0.dev0",
     author="Roger Ineichen and the Zope Community",
-    author_email="zope-dev@zope.org",
-    description="Zope3 egg based i18n locales extration recipes",
+    author_email="zope-dev@zope.dev",
+    description="Zope3 egg based i18n locales extraction recipes",
     long_description=(
         read("README.rst")
         + "\n\n"
@@ -50,14 +52,12 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Internet :: WWW/HTTP",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
         "Framework :: Buildout",
@@ -68,6 +68,7 @@ setup(
     include_package_data=True,
     package_dir={"": "src"},
     namespace_packages=["z3c", "z3c.recipe"],
+    python_requires='>=3.7',
     extras_require=dict(
         test=[
             "zope.component",

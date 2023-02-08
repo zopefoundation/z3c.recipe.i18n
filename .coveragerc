@@ -2,7 +2,6 @@
 # https://github.com/zopefoundation/meta/tree/master/config/buildout-recipe
 [run]
 source = z3c.recipe.i18n
-plugins = coverage_python_version
 branch = true
 parallel = true
 

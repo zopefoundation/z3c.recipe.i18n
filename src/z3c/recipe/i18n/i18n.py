@@ -17,10 +17,11 @@ A Buildout recipe for i18n scripts.
 import logging
 import os
 
+import pkg_resources
+
 import zc.buildout
 import zc.recipe.egg
 
-import pkg_resources
 
 this_loc = pkg_resources.working_set.find(
     pkg_resources.Requirement.parse("z3c.recipe.i18n")
@@ -46,7 +47,7 @@ env_template = """os.environ['%s'] = %r
 """
 
 
-class I18nSetup(object):
+class I18nSetup:
     def __init__(self, buildout, name, options):
         self.buildout = buildout
         self.name = name

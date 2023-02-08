@@ -12,7 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-from __future__ import print_function
+
 
 """Merge a POT file with all languages
 
@@ -29,11 +29,11 @@ Options:
         Specify the 'locales' directory for which to generate the statistics.
 
 """
-import shutil
-import sys
-import os
-import subprocess
 import getopt
+import os
+import shutil
+import subprocess
+import sys
 
 
 def usage(code, msg=""):
@@ -63,7 +63,7 @@ def merge(path):
         if not os.path.exists(poPath):
             shutil.copyfile(potPath, poPath)
 
-        print('Merging language "%s", domain "%s"' % (language, domain))
+        print('Merging language "{}", domain "{}"'.format(language, domain))
         rc = subprocess.call(["msgmerge", "-U", poPath, potPath])
         if rc != 0:
             failed.append(language)
