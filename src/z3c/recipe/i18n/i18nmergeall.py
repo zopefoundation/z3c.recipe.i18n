@@ -63,7 +63,7 @@ def merge(path):
         if not os.path.exists(poPath):
             shutil.copyfile(potPath, poPath)
 
-        print('Merging language "{}", domain "{}"'.format(language, domain))
+        print(f'Merging language "{language}", domain "{domain}"')
         rc = subprocess.call(["msgmerge", "-U", poPath, potPath])
         if rc != 0:
             failed.append(language)

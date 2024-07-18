@@ -53,11 +53,11 @@ setup(
         "Topic :: Internet :: WWW/HTTP",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
         "Framework :: Buildout",
@@ -68,7 +68,7 @@ setup(
     include_package_data=True,
     package_dir={"": "src"},
     namespace_packages=["z3c", "z3c.recipe"],
-    python_requires='>=3.7',
+    python_requires='>=3.8',
     extras_require=dict(
         test=[
             "zope.component",
