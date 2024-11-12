@@ -25,7 +25,7 @@ def read(*rnames):
 
 setup(
     name="z3c.recipe.i18n",
-    version="2.1.dev0",
+    version="2.1",
     author="Roger Ineichen and the Zope Community",
     author_email="zope-dev@zope.dev",
     description="Zope3 egg based i18n locales extraction recipes",
