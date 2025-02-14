@@ -40,7 +40,7 @@ setup(
         + "\n\n"
         + read("src", "z3c", "recipe", "i18n", "README.rst")
     ),
-    license="ZPL 2.1",
+    license="ZPL-2.1",
     keywords="zope3 z3c i18n locales extraction recipe",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -53,7 +53,6 @@ setup(
         "Topic :: Internet :: WWW/HTTP",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
@@ -69,7 +68,7 @@ setup(
     include_package_data=True,
     package_dir={"": "src"},
     namespace_packages=["z3c", "z3c.recipe"],
-    python_requires='>=3.8',
+    python_requires='>=3.9',
     extras_require=dict(
         test=[
             "zope.component",
@@ -93,5 +92,4 @@ setup(
         "zope.app.locales[extract] >= 4.1",
     ],
     entry_points={"zc.buildout": ["i18n = z3c.recipe.i18n.i18n:I18nSetup"]},
-    test_suite="z3c.recipe.i18n",
 )
